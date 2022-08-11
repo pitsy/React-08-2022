@@ -3,6 +3,8 @@ import './App.css';
 import Aveleht from './pages/Avaleht';
 import Ostukorv from './pages/Ostukorv';
 import LisaToode from './pages/LisaToode';
+import Seaded from './pages/Seaded';
+import Meist from './pages/Meist';
 
 function App() {
   return (
@@ -19,11 +21,19 @@ function App() {
       <Link to="/lisa-toode">
         <button>Lisa toode</button>
       </Link>
+      <Link to="/seaded">
+        <button>Lehe seaded</button>
+      </Link>
+      <Link to="/meist">
+        <button>Info meist</button>
+      </Link>
 
       <Routes>
         <Route path='' element={ <Aveleht />} />
         <Route path='ostukorv' element={ <Ostukorv />} />
         <Route path='lisa-toode' element={ <LisaToode />} />
+        <Route path='seaded' element={ <Seaded />} />
+        <Route path='meist' element={ <Meist />} />
       </Routes>
     </div>
   );
