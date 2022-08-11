@@ -1,0 +1,37 @@
+body {background-color: rgb(170, 186, 233);}
+
+.button1 {
+  color: rgb(163, 163, 163);
+  background-color: chartreuse;
+  width: 10%;
+  position: relative;
+  top: 100px;
+  left: 10%;
+}
+
+.button1:hover {
+  height: 50px;
+}
+
+.button1:active {
+  cursor: grab;
+}
+
+.t1 {
+  position: relative;
+  top: 150px;
+  color: blue;
+  font-style: italic;
+}
+
+.t1:hover {
+  font-size: 24px;
+}
+
+.img1 {
+  width: 400px;
+  height: 150px;
+  position: fixed;
+  top: 200px;
+  right: 10px;
+}
