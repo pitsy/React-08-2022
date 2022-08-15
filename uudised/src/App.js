@@ -1,23 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import { Link, Route, Routes } from 'react-router-dom';
+import Avaleht from './pages/Avaleht';
+import Uudised from './pages/Uudised';
+import Kontakt from './pages/Kontakt';
+import Meist from './pages/Meist';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Link to='/'>
+        <button>Avaleht</button>
+      </Link>
+      <Link to='/uudised'>
+        <button>Uudised</button>
+      </Link>
+      <Link to='/kontakt'>
+        <button>Vota meiega uhendust</button>
+      </Link>
+      <Link to='/meist'>
+        <button>Info meist</button>
+      </Link>
+      <br /><br />
+
+      <Routes>
+        <Route path='' element={ <Avaleht />} />
+        <Route path='uudised' element={ <Uudised /> } />
+        <Route path='kontakt' element={ <Kontakt />} />
+        <Route path='meist' element={ <Meist /> } />
+      </Routes>
     </div>
   );
 }
