@@ -5,6 +5,8 @@ import Ostukorv from './pages/Ostukorv';
 import LisaToode from './pages/LisaToode';
 import Seaded from './pages/Seaded';
 import Meist from './pages/Meist';
+import Poed from './pages/Poed';
+import Koduleht from './pages/Koduleht';
 
 function App() {
   return (
@@ -13,7 +15,7 @@ function App() {
       <button className="nupp">Nupp</button>
 
       <Link to="/">
-        <button>Avalehele</button>
+        <button>Koduleht</button>
       </Link>
       <Link to="/ostukorv">
         <button>Ostukorvi</button>
@@ -27,13 +29,21 @@ function App() {
       <Link to="/meist">
         <button>Info meist</button>
       </Link>
+      <Link to="/poed">
+        <button>Poed</button>
+      </Link>
+      <Link to="/avaleht">
+        <button>Avaleht</button>
+      </Link>
 
       <Routes>
-        <Route path='' element={ <Aveleht />} />
+        <Route path='' element={ <Koduleht />} />
+        <Route path='avaleht' element={ <Aveleht />} />
         <Route path='ostukorv' element={ <Ostukorv />} />
         <Route path='lisa-toode' element={ <LisaToode />} />
         <Route path='seaded' element={ <Seaded />} />
         <Route path='meist' element={ <Meist />} />
+        <Route path='poed' element={ <Poed />} />
       </Routes>
     </div>
   );
