@@ -29,6 +29,8 @@ function LisaToode() {
             tooted.push(nimiRef.current.value);
             tooted = JSON.stringify(tooted);
             localStorage.setItem('tooted', tooted); // vahetab vanad vaartused valja
+
+            nimiRef.current.value = '';
         }        
     }
 

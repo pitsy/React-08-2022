@@ -1,7 +1,7 @@
 
 function Koduleht() {
 
-    const tooted = JSON.parse(localStorage.getItem('tooted') || []);
+    const tooted = JSON.parse(localStorage.getItem('tooted'))  || [];
 
     const lisaOstukorvi = (klikitudToode) => {
         console.log(klikitudToode);

@@ -10,8 +10,15 @@ function Ostukorv() {
         localStorage.setItem('ostukorv', JSON.stringify(ostukorv)); // salvestab
     }
 
+    function tuhjenda() {
+        uuendaOstukorvi([]);
+        localStorage.setItem('ostukorv', JSON.stringify([]));
+    }
+
     return ( 
         <div>
+            {ostukorv.length > 0 && <button onClick={tuhjenda}>Tuhjenda</button>}
+            {ostukorv.length > 0 && <div>Ostukorvis on {ostukorv.length} eset</div>}
             { ostukorv.length === 0 && <div>Ostukorv on tuhi!</div> }
             { ostukorv.map( (element, index) => 
             <div key={index}> 
