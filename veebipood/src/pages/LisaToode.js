@@ -8,6 +8,8 @@ function LisaToode() {
     // laheb inputi sisse
     const nimiRef = useRef(); // laheb alati input kulge
     // const ingliseNimiRef = useRef(); // laheb alati input kulge
+    const hindRef = useRef();
+    const aktiivsusRef = useRef();
 
     const lisa = () => {
         if (nimiRef.current.value === "") {
@@ -26,19 +28,30 @@ function LisaToode() {
 
             let tooted = localStorage.getItem('tooted'); // saada katte koik varasemad vaartused 1) [midagi] 2) null
             tooted = JSON.parse(tooted) || [];
-            tooted.push(nimiRef.current.value);
+            const uusToode = {
+                nimi: nimiRef.current.value, 
+                hind: Number(hindRef.current.value),
+                aktiivsus: aktiivsusRef.current.checked
+            }
+            tooted.push(uusToode);
             tooted = JSON.stringify(tooted);
             localStorage.setItem('tooted', tooted); // vahetab vanad vaartused valja
 
             nimiRef.current.value = '';
+            hindRef.current.value = '';
+            aktiivsusRef.current.value = false;
         }        
     }
 
     return ( 
     <div>
         <div>{s6num}</div>
-        <label>Toote nimi</label>
+        <label>Toote nimi </label>
         <input ref={nimiRef} type="text" />
+        <label>Toote hind </label>
+        <input ref={hindRef} type="number" />
+        <label>Toote aktiivsus </label>
+        <input ref={aktiivsusRef} type="checkbox" />
         {/* <label>Toote inglise nimi</label>
         <input ref={ingliseNimiRef} type="text" /> */}
         <button onClick={lisa}>Lisa</button>
