@@ -36,7 +36,7 @@ function Exercise_12() {
     }
 
     function lisa() {
-        let vastus = kraam.push('chickens', 'cats', 'dogs');
+        kraam.push('chickens', 'cats', 'dogs');
         uuendaKraami(kraam.slice());
     }
 

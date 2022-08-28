@@ -4,6 +4,7 @@ import Tagasiside from './pages/Tagasiside';
 import TagasisideAndjad from './pages/TagasisideAndjad';
 import Exercise_12 from './pages/exercise_12';
 import Tegevused from './pages/Tegevused';
+import Exercise_17 from './pages/Exercise_17';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
       <Link to='/e_12'>
         <button>E12</button>
       </Link>
+      <Link to='/e_17'>
+        <button>E17</button>
+      </Link>
       <Link to='/tegevused'>
         <button>Tegevused</button>
       </Link>
@@ -30,6 +34,7 @@ function App() {
         <Route path='/andjad' exact element={ <TagasisideAndjad />} />
         <Route path='/e_12' exact element={ <Exercise_12 />} />
         <Route path='/tegevused' exact element={ <Tegevused />} />
+        <Route path='/e_17' exact element={ <Exercise_17 />} />
       </Routes>
     </div>
   );
