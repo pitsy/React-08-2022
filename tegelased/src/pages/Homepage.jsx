@@ -11,7 +11,7 @@ function Homepage() {
     ];
 
     // const tegelased = JSON.parse(localStorage.getItem('tegelased')) || [];
-    const [tegelased, uuendaTegelasi] = useState(JSON.parse(localStorage.getItem('tegelased'))  || []);
+    const [tegelased, uuendaTegelasi] = useState(algTegelased.concat(JSON.parse(localStorage.getItem('tegelased'))  || []));
     // tegelased.push(algTegelased);
     // uuendaTegelasi(tegelased.slice());
     // localStorage.setItem('tegelased', JSON.stringify(tegelased));
