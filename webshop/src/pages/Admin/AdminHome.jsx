@@ -7,9 +7,9 @@ function AdminHome() {
             <Link to='/admin/lisa-toode'>
                 <Button variant='dark'>Lisa uus toode</Button>
             </Link>
-            <Link to='/admin/muuda-toode'>
+            {/* <Link to='/admin/muuda-toode'>
                 <Button variant='dark'>Muuda toodet</Button>
-            </Link>
+            </Link> */}
             <Link to='/admin/halda-tooteid'>
                 <Button variant='dark'>Halda tooteid</Button>
             </Link>

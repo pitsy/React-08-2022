@@ -1,16 +1,28 @@
-import productsFromFile from '../data/products.json';
+// import productsFromFile from '../data/products.json';
 import Button from 'react-bootstrap/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Spinner from '../components/Spinner';
 
 function Homepage() {
 
-    const [products, setProducts] = useState(productsFromFile);
+    const [products, setProducts] = useState([]);
+    const [dbProducts, setDbProducts] = useState([]);
+    // const [categories, setCategories] = useState([]);
 
     // js get unique values from array
-    const categories = [...new Set(productsFromFile.map(element => element.category))];
+    const categories = [...new Set(dbProducts.map(element => element.category))];
     const [activeCategory, setActiveCategory] = useState('all');
 
     // "scraping" python
+
+    useEffect(() => {
+        fetch('https://react0922-default-rtdb.europe-west1.firebasedatabase.app/products.json')
+            .then(res => res.json())
+            .then(data => {
+                setProducts(data || []);
+                setDbProducts(data || []);
+            });
+    }, []);
 
     function addToCart(productClicked) {
         let cart = sessionStorage.getItem('cart'); // sessionStorage kaob brauseri sulgemisel
@@ -22,10 +34,10 @@ function Homepage() {
 
     function filterByCategory(categoryClicked) {
         if (categoryClicked === 'all') {
-            setProducts(productsFromFile);
+            setProducts(dbProducts);
             setActiveCategory('all');
         } else {
-            const result = productsFromFile.filter(element => element.category === categoryClicked);
+            const result = dbProducts.filter(element => element.category === categoryClicked);
             setProducts(result);
             setActiveCategory(categoryClicked);
         }
@@ -55,9 +67,10 @@ function Homepage() {
     return ( 
         <div>
             <div> <i>Uksiku toote vaatamine kodus</i> </div> <br />
-            <div className={activeCategory ==='all' ? 'active-category' : undefined} onClick={() => filterByCategory('all')}>Koik kategooriad</div>
-            <div>{categories.map((element, index) => 
-                <div key={index} className={activeCategory === element ? 'active-category' : undefined} 
+            <div className={activeCategory ==='all' ? 'active-category' : undefined} 
+                onClick={() => filterByCategory('all')}>Koik kategooriad</div>
+            <div>{categories.map(element => 
+                <div key={element} className={activeCategory === element ? 'active-category' : undefined} 
                 onClick={() => filterByCategory(element)}>{element}</div>)}
             </div>
             <br />
@@ -65,6 +78,10 @@ function Homepage() {
             <button onClick={sortZA}>Sort Z-A</button>
             <button onClick={sortPriceAsc}>Sort price ascending</button>
             <button onClick={sortPriceDesc}>Sort price descending</button>
+
+            <br />
+            {products.length === 0 && <Spinner />}
+
             <div>{products.length} tk</div>
             {products.map(element => 
                 <div key={element.id}>
