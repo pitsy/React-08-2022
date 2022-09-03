@@ -2,6 +2,8 @@
 import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from 'react';
 import Spinner from '../components/Spinner';
+import {Link} from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 function Homepage() {
 
@@ -30,6 +32,7 @@ function Homepage() {
         cart.push(productClicked);
         cart = JSON.stringify(cart);
         sessionStorage.setItem('cart', cart);
+        toast.success(productClicked.name + ' ostukorvi lisatud!');
     }
 
     function filterByCategory(categoryClicked) {
@@ -66,6 +69,7 @@ function Homepage() {
 
     return ( 
         <div>
+            <ToastContainer />
             <div> <i>Uksiku toote vaatamine kodus</i> </div> <br />
             <div className={activeCategory ==='all' ? 'active-category' : undefined} 
                 onClick={() => filterByCategory('all')}>Koik kategooriad</div>
@@ -82,13 +86,17 @@ function Homepage() {
             <br />
             {products.length === 0 && <Spinner />}
 
-            <div>{products.length} tk</div>
+            <div>Tooteid: {products.length} tk</div>
+            <br />
             {products.map(element => 
                 <div key={element.id}>
-                    <img src={element.image} alt="" />
-                    <div>{element.name}</div>
+                    <Link to={'/product/' + element.name}>
+                        <img src={element.image} alt="" />
+                        <div>{element.name}</div>
+                    </Link>
                     <div>{element.price}</div>
                     <Button onClick={() => addToCart(element)}>Lisa ostukorvi</Button>
+                    <br /><br />
                 </div> )}
         </div> );
 }

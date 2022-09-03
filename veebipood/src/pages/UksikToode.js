@@ -9,7 +9,7 @@ function UksikToode() {
 
     return ( 
         <div>
-            { otsitudToode !== undefined && <div>
+            { otsitudToode !== undefined && <div>   
                 <div>{otsitudToode.nimi}</div>
                 <div>{otsitudToode.hind}</div>
                 <div>{otsitudToode.aktiivsus + 0}</div>

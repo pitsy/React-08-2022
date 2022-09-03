@@ -14,6 +14,7 @@ import MaintainProducts from './pages/Admin/MaintainProducts';
 import MaintainShops from './pages/Admin/MaintainShops';
 import MaintainCategories from './pages/Admin/MaintainCategories';
 import { useTranslation } from 'react-i18next';
+import IndividualProduct from './pages/IndividualProduct';
 
 function App() {
 
@@ -47,11 +48,12 @@ function App() {
         <Route path='meist' element={ <AboutUs /> } />
         <Route path='poed' element={ <Shops /> } />
         <Route path='ostukorv' element={ <Cart /> } />
-        <Route path='admin/lisa-toode' element={ <AddProduct /> } />
+        <Route path='admin/lisa-toode' element={ <AddProduct /> } />  
         <Route path='admin/muuda-toode/:id' element={ <EditProduct /> } />
         <Route path='admin/halda-tooteid' element={ <MaintainProducts /> } />
         <Route path='admin/halda-poode' element={ <MaintainShops /> } />
         <Route path='admin/halda-kategooriaid' element={ <MaintainCategories /> } />
+        <Route path='product/:name' element={ <IndividualProduct />} />
       </Routes>
     </div>
   );
