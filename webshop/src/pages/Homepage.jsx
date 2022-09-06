@@ -26,10 +26,18 @@ function Homepage() {
             });
     }, []);
 
+                        // {product} --> {product: {id: 11, name: 'hshsh}, quantity: 6}
     function addToCart(productClicked) {
         let cart = sessionStorage.getItem('cart'); // sessionStorage kaob brauseri sulgemisel
         cart = JSON.parse(cart) || [];
-        cart.push(productClicked);
+        const index = cart.findIndex(element => element.product.id === productClicked.id);
+        if (index >= 0) {
+            // suurenda kogust
+            // otsin jarjekorranumbriga ules ja muudan kogust
+            cart[index].quantity = cart[index].quantity + 1;
+        } else {
+            cart.push({product: productClicked, quantity: 1});
+        }
         cart = JSON.stringify(cart);
         sessionStorage.setItem('cart', cart);
         toast.success(productClicked.name + ' ostukorvi lisatud!');
@@ -70,7 +78,6 @@ function Homepage() {
     return ( 
         <div>
             <ToastContainer />
-            <div> <i>Uksiku toote vaatamine kodus</i> </div> <br />
             <div className={activeCategory ==='all' ? 'active-category' : undefined} 
                 onClick={() => filterByCategory('all')}>Koik kategooriad</div>
             <div>{categories.map(element => 
