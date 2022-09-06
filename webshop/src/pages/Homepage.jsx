@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Spinner from '../components/Spinner';
 import {Link} from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import styles from '../css/Homepage.module.css';
 
 function Homepage() {
 
@@ -14,6 +15,7 @@ function Homepage() {
     // js get unique values from array
     const categories = [...new Set(dbProducts.map(element => element.category))];
     const [activeCategory, setActiveCategory] = useState('all');
+    let productCount = 0;
 
     // "scraping" python
 
@@ -75,8 +77,13 @@ function Homepage() {
         setProducts(products.slice());
     }
 
+    // function countFourProducts() {
+
+    // }
+
     return ( 
-        <div>
+        // className={styles.main}
+        <div> 
             <ToastContainer />
             <div className={activeCategory ==='all' ? 'active-category' : undefined} 
                 onClick={() => filterByCategory('all')}>Koik kategooriad</div>
@@ -95,7 +102,7 @@ function Homepage() {
 
             <div>Tooteid: {products.length} tk</div>
             <br />
-            {products.map(element => 
+            {products.map((element, index) => 
                 <div key={element.id}>
                     <Link to={'/product/' + element.name}>
                         <img src={element.image} alt="" />
@@ -103,8 +110,8 @@ function Homepage() {
                     </Link>
                     <div>{element.price}</div>
                     <Button onClick={() => addToCart(element)}>Lisa ostukorvi</Button>
-                    <br /><br />
-                </div> )}
+                    <br /><br /> 
+                </div>)}
         </div> );
 }
 
