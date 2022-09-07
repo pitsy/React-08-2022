@@ -5,6 +5,7 @@ import Uudised from './pages/Uudised';
 import Kontakt from './pages/Kontakt';
 import Meist from './pages/Meist';
 import LisaUudis from './pages/LisaUudis';
+import KasutajaPostitus from './pages/KasutajaPostitus';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path='kontakt' element={ <Kontakt />} />
         <Route path='meist' element={ <Meist /> } />
         <Route path='lisa-uudis' element={ <LisaUudis /> } />
+        <Route path='kasutaja-postitus/:kasutajaId' element={ <KasutajaPostitus /> } />
       </Routes>
     </div>
   );
