@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import Spinner from '../components/Spinner';
 import {Link} from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import styles from '../css/Homepage.module.css';
+// import styles from '../css/Homepage.module.css';
+import { useTranslation } from 'react-i18next';
 
 function Homepage() {
 
@@ -15,7 +16,7 @@ function Homepage() {
     // js get unique values from array
     const categories = [...new Set(dbProducts.map(element => element.category))];
     const [activeCategory, setActiveCategory] = useState('all');
-    let productCount = 0;
+    const { t, i18n } = useTranslation();
 
     // "scraping" python
 
@@ -42,7 +43,10 @@ function Homepage() {
         }
         cart = JSON.stringify(cart);
         sessionStorage.setItem('cart', cart);
-        toast.success(productClicked.name + ' ostukorvi lisatud!');
+        toast.success(productClicked.name + t('toast.cart-added'), {
+            theme: 'dark',
+            position: 'bottom-right'
+        });
     }
 
     function filterByCategory(categoryClicked) {
@@ -77,25 +81,23 @@ function Homepage() {
         setProducts(products.slice());
     }
 
-    // function countFourProducts() {
-
-    // }
-
     return ( 
         // className={styles.main}
         <div> 
             <ToastContainer />
             <div className={activeCategory ==='all' ? 'active-category' : undefined} 
-                onClick={() => filterByCategory('all')}>Koik kategooriad</div>
+                onClick={() => filterByCategory('all')}>
+                    {t('filter.all-categories')}
+                </div>
             <div>{categories.map(element => 
                 <div key={element} className={activeCategory === element ? 'active-category' : undefined} 
                 onClick={() => filterByCategory(element)}>{element}</div>)}
             </div>
             <br />
-            <button onClick={sortAZ}>Sort A-Z</button>
-            <button onClick={sortZA}>Sort Z-A</button>
-            <button onClick={sortPriceAsc}>Sort price ascending</button>
-            <button onClick={sortPriceDesc}>Sort price descending</button>
+            <button onClick={sortAZ}>{t('sort.az')}</button>
+            <button onClick={sortZA}>{t('sort.za')}</button>
+            <button onClick={sortPriceAsc}>{t('sort.price-asc')}</button>
+            <button onClick={sortPriceDesc}>{t('sort.price-desc')}</button>
 
             <br />
             {products.length === 0 && <Spinner />}

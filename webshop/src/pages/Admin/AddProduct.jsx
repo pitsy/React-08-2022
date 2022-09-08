@@ -11,10 +11,9 @@ function AddProduct() {
     const categoryRef = useRef();
     const imageRef = useRef();
     const activeRef = useRef();
-
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
-
+    const [idUnique, setIdUnique] = useState(true);
 
     useEffect(() => {
         fetch('https://react0922-default-rtdb.europe-west1.firebasedatabase.app/products.json')
@@ -52,11 +51,23 @@ function AddProduct() {
         toast.success("Uus toode edukalt lisatud!")
     }
 
+    function checkIdUniqueness() {
+        // kui ei ole: -1
+        const index = products.findIndex(element => element.id === Number(idRef.current.value));
+        if (index >= 0) {
+            // ei ole unikaalne
+            setIdUnique(false);
+        } else {
+            setIdUnique(true);
+        }
+    }
+
     return ( 
         <div>
             <ToastContainer />
+            { !idUnique && <div>Sisestasid mitteunikaalse ID!</div>}
             <label>ID </label> <br />
-            <input ref={idRef} type="number" /> <br />
+            <input onChange={checkIdUniqueness} ref={idRef} type="number" /> <br />
             <label>Nimi </label> <br />
             <input ref={nameRef} type="text" /> <br />
             <label>Hind </label> <br />
@@ -72,7 +83,7 @@ function AddProduct() {
             <input ref={imageRef} type="text" /> <br />
             <label>Aktiivne </label> <br />
             <input ref={activeRef} type="checkbox" /> <br />
-            <button onClick={addNewProduct}>Lisa toode</button>
+            <button disabled={!idUnique} onClick={addNewProduct}>Lisa toode</button>
         </div> );
 }
 

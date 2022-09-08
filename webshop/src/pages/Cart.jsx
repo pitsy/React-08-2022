@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useRef } from "react";
+import { useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom';
 import styles from '../css/Cart.module.css';
@@ -6,6 +7,16 @@ import styles from '../css/Cart.module.css';
 function Cart() {
 
     const [cart, setCart] = useState(JSON.parse(sessionStorage.getItem('cart')) || []);
+    const [parcelMachines, setParcelMachines] = useState([]);
+    const [selectedPM, setSelectedPM] = useState('');
+
+    const pmRef = useRef();
+
+    useEffect(() => {
+        fetch('https://www.omniva.ee/locations.json')
+            .then(res => res.json())
+            .then(data => setParcelMachines(data.filter(e => e.A0_NAME === 'EE') || []))
+    }, []);
 
     // eemaldamine 
     function removeProduct(index) {
@@ -48,12 +59,16 @@ function Cart() {
         return total;
     }
 
+    function pmSelected() {
+        setSelectedPM(pmRef.current.value);
+    }
+
     return ( 
         <div>
             { cart.length === 0 && <div>Ostukorv on tuhi!</div> }
             { cart.length > 0 && <div className={styles.info}>Ostukorvis on {totalQuantity()} eset</div>}
-            { cart.length > 0 && <div className={styles.info}>Kogusumma: {totalPrice()} €</div>}
-            <br /><br />
+            <br />
+            <div className={styles.info}>{ cart.length > 0 && <Button onClick={emptyCart}>Tuhjenda ostukorv</Button>}</div>            <br /><br />
             {cart.map((element, index) => 
                 <div className={styles.product} key={element.product.id}>
                     <Link to={'/product/' + element.name}>
@@ -71,8 +86,15 @@ function Cart() {
                     <br /><br />
                 </div>
             )}
+            <div className={styles.product}>
+                <div>Pakiautomaadid:</div>
+                <select onChange={pmSelected} ref={pmRef}>
+                    { parcelMachines.map(element => <option>{element.NAME}</option> ) }
+                </select>
+                { selectedPM !== '' && <div>Valitud pakiautomaat: {selectedPM}</div>}
+            </div>
+            { cart.length > 0 && <div className={styles.info}>{totalPrice()} €</div>}
             <br />
-            <div className={styles.info}>{ cart.length > 0 && <Button onClick={emptyCart}>Tuhjenda ostukorv</Button>}</div>
         </div> );
 }
 

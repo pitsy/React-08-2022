@@ -1,16 +1,22 @@
 import { useEffect, useState, useRef } from "react";
 import { ToastContainer, toast } from 'react-toastify';
+import Spinner from '../../components/Spinner';
 
 function MaintainCategories() {
 
     const [categories, setCategories] = useState([]);
     const categoryRef = useRef();
     const [isUnique, setUnique] = useState(true);
+    const [isLoading, setLoading] = useState(false);
 
-    useEffect(() => {                                                          // !!!!!!!!
+    useEffect(() => {             
+        setLoading(true);                                             // !!!!!!!!
         fetch('https://react0922-default-rtdb.europe-west1.firebasedatabase.app/categories.json')
             .then(res => res.json())
-            .then(data => setCategories(data || []));
+            .then(data => {
+                setCategories(data || []);
+                setLoading(false);
+            });
     }, []);
 
     function addNewCategory() {
@@ -50,12 +56,14 @@ function MaintainCategories() {
     return ( 
         <div>
             <ToastContainer />
-            <p>Halda kategooriaid</p> <br />
+            <p>Halda kategooriaid</p>
             <div>
                 <label>Kategooria</label>
                 <input onChange={findIfCategoryUnique} ref={categoryRef} type="text" />
                 <button disabled={isUnique === false} onClick={addNewCategory}>Lisa uus kategooria</button>
-                <br /><br />
+                <br />
+                {isLoading && <Spinner />}
+                <br />
                 <div>Kategooriad:</div>
                 {categories.map((element, index) => 
                     <div key={element.name}>
