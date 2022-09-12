@@ -1,10 +1,10 @@
 // import productsFromFile from '../data/products.json';
-import Button from 'react-bootstrap/Button';
+import { Button, Card, Container, Row, Col, ListGroup } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import Spinner from '../components/Spinner';
 import {Link} from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-// import styles from '../css/Homepage.module.css';
+import styles from '../css/Homepage.module.css';
 import { useTranslation } from 'react-i18next';
 
 function Homepage() {
@@ -33,6 +33,7 @@ function Homepage() {
     function addToCart(productClicked) {
         let cart = sessionStorage.getItem('cart'); // sessionStorage kaob brauseri sulgemisel
         cart = JSON.parse(cart) || [];
+        console.log(cart);
         const index = cart.findIndex(element => element.product.id === productClicked.id);
         if (index >= 0) {
             // suurenda kogust
@@ -81,39 +82,84 @@ function Homepage() {
         setProducts(products.slice());
     }
 
+    // const [sidebarTop, setSidebarTop] = useState(undefined);
+ 
+    // useEffect(() => {
+    //     const sidebarEl = document.querySelector('.sidebar').getBoundingClientRect();
+    //     setSidebarTop(sidebarEl.top);
+    // }, []);
+    
+    // useEffect(() => {
+    //     if (!sidebarTop) return;
+        
+    //     window.addEventListener('scroll', isSticky);
+    //     return () => {
+    //         window.removeEventListener('scroll', isSticky);
+    //     };
+    // }, [sidebarTop]);
+    
+    // function isSticky(e) {
+    //     const scrollTop = window.scrollY;
+    //     if (scrollTop >= sidebarTop - 10) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
     return ( 
-        // className={styles.main}
         <div> 
             <ToastContainer />
-            <div className={activeCategory ==='all' ? 'active-category' : undefined} 
-                onClick={() => filterByCategory('all')}>
-                    {t('filter.all-categories')}
-                </div>
-            <div>{categories.map(element => 
-                <div key={element} className={activeCategory === element ? 'active-category' : undefined} 
-                onClick={() => filterByCategory(element)}>{element}</div>)}
+            <br />
+
+            <div className={styles.menus}>
+
+                <Card border='light'>
+                    <ListGroup variant='flush'>
+                        <ListGroup.Item>
+                            <div className={activeCategory ==='all' ? 'active-category' : 'inactive-category'} 
+                            onClick={() => filterByCategory('all')}>
+                                {t('filter.all-categories')}
+                            </div>
+                        </ListGroup.Item>
+                        {categories.map(element => 
+                            <ListGroup.Item key={element} 
+                            className={activeCategory === element ? 'active-category' : 'inactive-category'} 
+                            onClick={() => filterByCategory(element)}>
+                                    {element}
+                            </ListGroup.Item>)}
+                    </ListGroup>
+                </Card>
+
+                <Container>
+                    <Button size='sm' variant='secondary' className={styles.sort} onClick={sortAZ}>{t('sort.az')}</Button>
+                    <Button size='sm' variant='secondary' className={styles.sort} onClick={sortZA}>{t('sort.za')}</Button>
+                    <Button size='sm' variant='secondary' className={styles.sort} onClick={sortPriceAsc}>{t('sort.price-asc')}</Button>
+                    <Button size='sm' variant='secondary' className={styles.sort} onClick={sortPriceDesc}>{t('sort.price-desc')}</Button>
+                    <div>Tooteid: {products.length} tk</div>
+                    <br />
+                    {products.length === 0 && <Spinner />}
+                    <Row xs={1} md={4} className="g-4">
+                        {products.map((element) => 
+                            <div key={element.id}>
+                                <Col>
+                                    <Card className='mb-3' style={{ width: '16rem' }} bg='light' border='dark'>
+                                        <Link className={styles.link} to={'/product/' + element.name}>
+                                            <Card.Img className={styles.img} src={element.image} alt="" />
+                                        </Link>
+                                        <Card.Body>
+                                            <Link className={styles.link} to={'/product/' + element.name}>
+                                                <Card.Title className={styles.title}>{element.name}</Card.Title>
+                                            </Link>
+                                            <Card.Text>{element.price} $</Card.Text>
+                                        </Card.Body>
+                                        <Button variant='dark' onClick={() => addToCart(element)}>Lisa ostukorvi</Button>
+                                    </Card>
+                                </Col>
+                        </div>)}    
+                    </Row>
+                </Container>
             </div>
-            <br />
-            <button onClick={sortAZ}>{t('sort.az')}</button>
-            <button onClick={sortZA}>{t('sort.za')}</button>
-            <button onClick={sortPriceAsc}>{t('sort.price-asc')}</button>
-            <button onClick={sortPriceDesc}>{t('sort.price-desc')}</button>
-
-            <br />
-            {products.length === 0 && <Spinner />}
-
-            <div>Tooteid: {products.length} tk</div>
-            <br />
-            {products.map((element, index) => 
-                <div key={element.id}>
-                    <Link to={'/product/' + element.name}>
-                        <img src={element.image} alt="" />
-                        <div>{element.name}</div>
-                    </Link>
-                    <div>{element.price}</div>
-                    <Button onClick={() => addToCart(element)}>Lisa ostukorvi</Button>
-                    <br /><br /> 
-                </div>)}
         </div> );
 }
 

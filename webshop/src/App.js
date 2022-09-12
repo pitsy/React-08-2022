@@ -12,6 +12,7 @@ import MaintainShops from './pages/Admin/MaintainShops';
 import MaintainCategories from './pages/Admin/MaintainCategories';
 import IndividualProduct from './pages/IndividualProduct';
 import NavigationBar from './components/NavigationBar';
+import Testing from './pages/Testing';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
         <Route path='admin/halda-poode' element={ <MaintainShops /> } />
         <Route path='admin/halda-kategooriaid' element={ <MaintainCategories /> } />
         <Route path='product/:name' element={ <IndividualProduct />} />
+        <Route path='testing' element={ <Testing />} />
       </Routes>
     </div>
   );

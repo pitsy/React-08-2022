@@ -19,6 +19,7 @@
 .image {
     width: 100px;
     height: 100px;
+    border-radius: 10px;
 }
 
 .name {
@@ -49,4 +50,15 @@
 .info {
     margin: 0 10%;
     text-align: right;
+}
+
+.link {
+    color: black;
+    text-decoration: none;
+}
+
+.link:hover {
+    opacity: 0.7;
+    cursor: pointer;
+    color:rgb(75, 75, 75);
 }

@@ -61,17 +61,17 @@ function Cart() {
 
     function pmSelected() {
         setSelectedPM(pmRef.current.value);
-    }
+    }   
 
     return ( 
         <div>
             { cart.length === 0 && <div>Ostukorv on tuhi!</div> }
             { cart.length > 0 && <div className={styles.info}>Ostukorvis on {totalQuantity()} eset</div>}
             <br />
-            <div className={styles.info}>{ cart.length > 0 && <Button onClick={emptyCart}>Tuhjenda ostukorv</Button>}</div>            <br /><br />
+            <div className={styles.info}>{ cart.length > 0 && <Button variant='dark' onClick={emptyCart}>Tuhjenda ostukorv</Button>}</div>            <br /><br />
             {cart.map((element, index) => 
                 <div className={styles.product} key={element.product.id}>
-                    <Link to={'/product/' + element.name}>
+                    <Link className={styles.link} to={'/product/' + element.name}>
                         <img className={styles.image} src={element.product.image} alt="" />
                         <div className={styles.name}>{element.product.name}</div>
                     </Link>
