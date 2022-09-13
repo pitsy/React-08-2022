@@ -35,7 +35,7 @@ function Cart() {
     // tuhjendamine
     function emptyCart() {
         setCart([]);
-        localStorage.setItem('cart', JSON.stringify([]));
+        sessionStorage.setItem('cart', JSON.stringify([]));
     }
 
     function decreaseQuantity(index) {
@@ -65,7 +65,7 @@ function Cart() {
 
     return ( 
         <div>
-            { cart.length === 0 && <div>Ostukorv on tuhi!</div> }
+            { cart.length === 0 && <div className={styles.info}>Ostukorv on tuhi!</div> }
             { cart.length > 0 && <div className={styles.info}>Ostukorvis on {totalQuantity()} eset</div>}
             <br />
             <div className={styles.info}>{ cart.length > 0 && <Button variant='dark' onClick={emptyCart}>Tuhjenda ostukorv</Button>}</div>            <br /><br />
@@ -86,13 +86,13 @@ function Cart() {
                     <br /><br />
                 </div>
             )}
-            <div className={styles.product}>
+            { cart.length > 0 && <div className={styles.product}>
                 <div>Pakiautomaadid:</div>
                 <select onChange={pmSelected} ref={pmRef}>
                     { parcelMachines.map(element => <option>{element.NAME}</option> ) }
                 </select>
                 { selectedPM !== '' && <div>Valitud pakiautomaat: {selectedPM}</div>}
-            </div>
+            </div>}
             { cart.length > 0 && <div className={styles.info}>{totalPrice()} €</div>}
             <br />
         </div> );

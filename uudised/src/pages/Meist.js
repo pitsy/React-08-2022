@@ -11,17 +11,23 @@ function Meist() {
         {nimi: 'Hapu Marmelaad', ala: 'Puugi Torje', telefon: '+123451234'},
         {nimi: 'Kassu Koer', ala: 'Turva', telefon: '+999999999'}
     ]
+    const [valitud, uuendaValitud] = useState('');
+
+    function votaUhendust(tootaja) {
+        n2itaKontakt(tootaja.telefon);
+        uuendaValitud(tootaja.nimi);
+    }
 
     return ( 
         <div>
             <div>See on meist leht</div> <br />
-            <div>Me oleme toredad tegelased:</div> <br />
+            <div>Nemad on meie toredad tegelased:</div> 
             <br />
             <div>{tootajad.map(tootaja => 
-                <div>
+                <div className={tootaja.nimi === valitud ? 'valitud' : undefined} key={tootaja.nimi}>
                     <div>{tootaja.nimi}</div>
                     <div>{tootaja.ala}</div>
-                    <button onClick={() => n2itaKontakt(tootaja.telefon)}>Vota uhendust</button>
+                    <button onClick={() => votaUhendust(tootaja)}>Vota uhendust</button>
                     <br /><br />
                 </div>                
             )}</div>
