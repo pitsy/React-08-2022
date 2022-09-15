@@ -49,3 +49,11 @@
 .search {
     margin: 5px 10%;
 }
+
+.pagination {
+    --bs-pagination-active-bg: black;
+    --bs-pagination-active-border-color: black;
+    --bs-link-color: black;
+    --bs-link-hover-color: black;
+    --bs-pagination-border-width: 0px;
+}

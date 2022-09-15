@@ -3,9 +3,9 @@ import { Carousel } from "react-bootstrap";
 function CarouselGallery() {
 
     const images = [
-        {'image':"https://picsum.photos/id/237/500/400",'alt':'First slide','header':'First slide label','text':'Nulla vitae elit libero'},
-        {'image':"https://picsum.photos/id/236/500/400",'alt':'Second slide','header':'Second slide label','text':'Lorem ipsum dolor sit amet'},
-        {'image':"https://picsum.photos/id/235/500/400",'alt':'Third slide','header':'Third slide label','text':'Praesent commodo cursus magna'}
+        {'image':"https://picsum.photos/id/237/700/400",'alt':'First slide','header':'First slide label','text':'Nulla vitae elit libero'},
+        {'image':"https://picsum.photos/id/236/700/400",'alt':'Second slide','header':'Second slide label','text':'Lorem ipsum dolor sit amet'},
+        {'image':"https://picsum.photos/id/235/700/400",'alt':'Third slide','header':'Third slide label','text':'Praesent commodo cursus magna'}
     ]
 
     return ( 

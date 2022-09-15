@@ -32,17 +32,16 @@ function IndividualProduct() {
         <div>
             <ToastContainer />
             <div className={styles.display}>
-                {clickedProduct !== undefined && <div>  
-                    <img src={clickedProduct.image} alt="" /> 
+                {clickedProduct !== undefined && <div className={styles.container}>  
+                    <img  className={styles.img} src={clickedProduct.image} alt="" /> 
                 </div>}
                 <Container className={styles.info}>
                     {clickedProduct !== undefined && <div>  
                         <div><h2>{ clickedProduct.name}</h2></div>
-                        <div>{ clickedProduct.description}</div>
-                        <br /><br />
-                        <div className={styles.price}>{ clickedProduct.price} €</div>
+                        <div className={styles.description}>{ clickedProduct.description}</div>
                         <br />
-                        <Button variant='dark' onClick={() => addToCart(clickedProduct)}>Lisa ostukorvi</Button>
+                        <div className={styles.price}>{ clickedProduct.price} €</div>
+                        <Button className={styles.button} variant='dark' onClick={() => addToCart(clickedProduct)}>Lisa ostukorvi</Button>
                     </div>}
                 </Container>
             </div>
