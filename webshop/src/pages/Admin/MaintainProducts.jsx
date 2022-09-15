@@ -19,12 +19,14 @@ function MaintainProducts() {
             });
     }, []);
 
-    function deleteProduct(index) {
-        products.splice(index,1);
-        setProducts(products.slice());
+    function deleteProduct(productClicked) {
+        const index = dbProducts.findIndex(element=> element.id === productClicked.id);
+        dbProducts.splice(index,1);
+        setDbProducts(dbProducts.slice());
+        searchProducts();
         fetch('https://react0922-default-rtdb.europe-west1.firebasedatabase.app/products.json', {
             method: 'PUT',
-            body: JSON.stringify(products),
+            body: JSON.stringify(dbProducts)
         });
         toast.success("Toode edukalt kustutatud!", {
             theme: 'dark',
@@ -39,22 +41,36 @@ function MaintainProducts() {
         setProducts(result);
     }
 
+    function changeProductActive(productClicked) {
+        const index = dbProducts.findIndex(element=> element.id === productClicked.id);
+        dbProducts[index].active = !dbProducts[index].active;
+        setDbProducts(dbProducts.slice());
+        searchProducts();
+        fetch('https://react0922-default-rtdb.europe-west1.firebasedatabase.app/products.json', {
+            method: 'PUT',
+            body: JSON.stringify(dbProducts)
+        });
+    }
+
     return ( 
         <div>
             <ToastContainer />
-            <span>Otsi tooteid: </span><input type="text" ref={searchedRef} onChange={searchProducts} />
-            <span> {products.length}</span>
-            <br />
-            {products.map((element, index) =>
-                <div key={element.id}>
-                    <div>{element.id}</div>
-                    <div>{element.name}</div>
-                    <img src={element.image} alt="" />
-                    <div>{element.price}</div>
-                    <div>{element.category}</div>
-                    <div>{element.description}</div>
-                    <div>{element.active}</div>
-                    <button onClick={() => deleteProduct(index)}>X</button>
+            <div className='search'>
+                <span>Otsi tooteid: </span><input type="text" ref={searchedRef} onChange={searchProducts} />
+                <span> {products.length}</span>
+            </div>            
+            {products.map(element =>
+                <div key={element.id} className={element.active ? 'active-product' : 'inactive-product'}>
+                    <div onClick={() => changeProductActive(element)}>
+                        <div>{element.id}</div>
+                        <div><b>{element.name}</b></div>
+                        <img src={element.image} alt="" />
+                        <div>{element.price}</div>
+                        <div>{element.category}</div>
+                        <div>{element.description}</div>
+                        <div>{element.active}</div>
+                    </div>
+                    <button onClick={() => deleteProduct(element)}>X</button>
                     <Link to={'/admin/muuda-toode/' + element.id}>
                         <button>Muuda toode</button>
                     </Link>

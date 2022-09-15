@@ -1,11 +1,12 @@
 // import productsFromFile from '../data/products.json';
-import { Button, Card, Container, Row, Col, ListGroup } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import Spinner from '../components/Spinner';
-import CarouselGallery from '../components/CarouselGallery';
-import SortButtons from '../components/SortButtons';
-import PageButtons from '../components/PageButtons';
-import {Link} from 'react-router-dom';
+import CarouselGallery from '../components/home/CarouselGallery';
+import SortButtons from '../components/home/SortButtons';
+import PageButtons from '../components/home/PageButtons';
+import CategoryFilter from '../components/home/CategoryFilter';
+import ProductGallery from '../components/home/ProductGallery';
 import { ToastContainer, toast } from 'react-toastify';
 import styles from '../css/Homepage.module.css';
 import { useTranslation } from 'react-i18next';
@@ -19,7 +20,6 @@ function Homepage() {
     const categories = [...new Set(dbProducts.map(element => element.category))];
     const [activeCategory, setActiveCategory] = useState('all');
     const { t } = useTranslation();
-
     const [activePage, setActivePage] = useState(1);
 
     // "scraping" python
@@ -83,22 +83,11 @@ function Homepage() {
             <CarouselGallery />
             <br />
             <div className={styles.menus}>
-                <Card border='light'>
-                    <ListGroup variant='flush'>
-                        <ListGroup.Item>
-                            <div className={activeCategory ==='all' ? 'active-category' : 'inactive-category'} 
-                            onClick={() => filterByCategory('all')}>
-                                {t('filter.all-categories')}
-                            </div>
-                        </ListGroup.Item>
-                        {categories.map(element => 
-                            <ListGroup.Item key={element} 
-                            className={activeCategory === element ? 'active-category' : 'inactive-category'} 
-                            onClick={() => filterByCategory(element)}>
-                                    {element}
-                            </ListGroup.Item>)}
-                    </ListGroup>
-                </Card>
+                <CategoryFilter 
+                    filterByCategory={filterByCategory}
+                    actCategory={activeCategory}
+                    categories={categories}
+                />
 
                 <Container>
 
@@ -118,25 +107,10 @@ function Homepage() {
                     />
 
                     {products.length === 0 && <Spinner />}
-                    <Row xs={1} md={4} className="g-4">
-                        {products.map((element) => 
-                            <div key={element.id}>
-                                <Col>
-                                    <Card className='mb-3' style={{ width: '16rem' }} bg='light' border='dark'>
-                                        <Link className={styles.link} to={'/product/' + element.name}>
-                                            <Card.Img className={styles.img} src={element.image} alt="" />
-                                        </Link>
-                                        <Card.Body>
-                                            <Link className={styles.link} to={'/product/' + element.name}>
-                                                <Card.Title className={styles.title}>{element.name}</Card.Title>
-                                            </Link>
-                                            <Card.Text>{element.price} $</Card.Text>
-                                        </Card.Body>
-                                        <Button variant='dark' onClick={() => addToCart(element)}>Lisa ostukorvi</Button>
-                                    </Card>
-                                </Col>
-                        </div>)}    
-                    </Row>
+                    <ProductGallery 
+                        products={products}
+                        addToCart={addToCart}
+                    />
 
                     <PageButtons 
                         fProducts={filteredProducts}

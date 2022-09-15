@@ -8,5 +8,9 @@
     "sort.za": "Sort Z-A",
     "sort.price-asc": "Sort price ascending",
     "sort.price-desc": "Sort price descending",
-    "toast.cart-added": " added to cart!"
+    "toast.cart-added": " added to cart!",
+    "url.admin": "admin",
+    "url.about": "about",
+    "url.shops": "shops",
+    "url.cart": "cart"
 }

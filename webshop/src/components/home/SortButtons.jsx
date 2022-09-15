@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap";
-import styles from '../css/Homepage.module.css';
+import styles from '../../css/Homepage.module.css';
 import { useTranslation } from 'react-i18next';
 
 function SortButtons(props) {

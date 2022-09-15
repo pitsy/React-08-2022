@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Button from 'react-bootstrap/Button';
+import { Container, Button } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
+import styles from '../css/IndividualProduct.module.css';
 
 function IndividualProduct() {
 
@@ -30,13 +31,21 @@ function IndividualProduct() {
     return ( 
         <div>
             <ToastContainer />
-            {clickedProduct !== undefined && <div>  
-                <img src={clickedProduct.image} alt="" /> 
-                <div>{ clickedProduct.name}</div>
-                <div>{ clickedProduct.price} €</div>
-                <div>{ clickedProduct.description}</div>
-                <Button onClick={() => addToCart(clickedProduct)}>Lisa ostukorvi</Button>
-            </div>}
+            <div className={styles.display}>
+                {clickedProduct !== undefined && <div>  
+                    <img src={clickedProduct.image} alt="" /> 
+                </div>}
+                <Container className={styles.info}>
+                    {clickedProduct !== undefined && <div>  
+                        <div><h2>{ clickedProduct.name}</h2></div>
+                        <div>{ clickedProduct.description}</div>
+                        <br /><br />
+                        <div className={styles.price}>{ clickedProduct.price} €</div>
+                        <br />
+                        <Button variant='dark' onClick={() => addToCart(clickedProduct)}>Lisa ostukorvi</Button>
+                    </div>}
+                </Container>
+            </div>
             {clickedProduct === undefined && <div>Toodet ei leitud</div> }
         </div> );
 }

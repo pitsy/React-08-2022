@@ -16,6 +16,7 @@ function EditProduct() {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [idUnique, setIdUnique] = useState(true);
+    const [message, setMessage] = useState('');
 
     // .find() <-- leian id abil oige ules
     const productFound = products.find(element => element.id === Number(id));
@@ -32,7 +33,24 @@ function EditProduct() {
             .then(data => setCategories(data || []));
     }, []);
 
+    function checkIfFilled(ref, errorMessage) {
+        if (ref.current.value === '') {
+            setMessage(errorMessage);
+            return true;
+        }
+    }
+
     function updateProduct() {
+        const descNotFilled = checkIfFilled(descriptionRef, 'Kirjeldus on taitmata');
+        const imgNotFilled = checkIfFilled(imageRef, 'Pilt on taitmata');
+        const priceNotFilled = checkIfFilled(priceRef, 'Hind on taitmata');
+        const nameNotFilled = checkIfFilled(nameRef, 'Nimi on taitmata');
+        const idNotFilled = checkIfFilled(idRef, 'ID on taitmata');
+
+        if (idNotFilled || imgNotFilled || priceNotFilled || nameNotFilled || descNotFilled) {
+            return;
+        }
+
         const newProduct = {
             id: Number(idRef.current.value), // saab jutumarkides vaartuse
             name: nameRef.current.value,
@@ -62,6 +80,7 @@ function EditProduct() {
 
     return ( 
         <div>
+            <div>{message}</div>
             {productFound !== undefined && 
             <div>
                 { !idUnique && <div>Sisestasid mitteunikaalse ID!</div>}

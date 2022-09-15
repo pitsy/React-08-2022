@@ -14,6 +14,7 @@ function AddProduct() {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [idUnique, setIdUnique] = useState(true);
+    const [message, setMessage] = useState('');
 
     useEffect(() => {
         fetch('https://react0922-default-rtdb.europe-west1.firebasedatabase.app/products.json')
@@ -25,7 +26,24 @@ function AddProduct() {
             .then(data => setCategories(data || []));
     }, []);
 
+    function checkIfFilled(ref, errorMessage) {
+        if (ref.current.value === '') {
+            setMessage(errorMessage);
+            return true;
+        }
+    }
+
     function addNewProduct() {
+        const descNotFilled = checkIfFilled(descriptionRef, 'Kirjeldus on taitmata');
+        const imgNotFilled = checkIfFilled(imageRef, 'Pilt on taitmata');
+        const priceNotFilled = checkIfFilled(priceRef, 'Hind on taitmata');
+        const nameNotFilled = checkIfFilled(nameRef, 'Nimi on taitmata');
+        const idNotFilled = checkIfFilled(idRef, 'ID on taitmata');
+
+        if (idNotFilled || imgNotFilled || priceNotFilled || nameNotFilled || descNotFilled) {
+            return;
+        }
+
         const newProduct = {
             id: Number(idRef.current.value), // saab jutumarkides vaartuse
             name: nameRef.current.value,
@@ -66,6 +84,7 @@ function AddProduct() {
         <div>
             <ToastContainer />
             { !idUnique && <div>Sisestasid mitteunikaalse ID!</div>}
+            <div>{message}</div>
             <label>ID </label> <br />
             <input onChange={checkIdUniqueness} ref={idRef} type="number" /> <br />
             <label>Nimi </label> <br />

@@ -1,0 +1,19 @@
+
+.display {
+    display: flex;
+    justify-content: space-around;
+    margin: 2% 8%;
+    /* padding: 10px 0; */
+}
+
+.info {
+    margin-left: 5%;
+    margin-right: 30%;
+}
+
+.price {
+    border-bottom: 1px solid gray;
+    font-weight: bold;
+    font-size: large;
+    text-align: right;
+}

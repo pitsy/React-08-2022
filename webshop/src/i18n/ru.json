@@ -8,5 +8,9 @@
     "sort.za": "Сортировать Z-A",
     "sort.price-asc": "Сортировать цену по возрастанию",
     "sort.price-desc": "Сортировать цену по убыванию",
-    "toast.cart-added": " добавлено в корзину!"
+    "toast.cart-added": " добавлено в корзину!",
+    "url.admin": "administratom",
+    "url.about": "onas",
+    "url.shops": "magaziny",
+    "url.cart": "korzina"
 }

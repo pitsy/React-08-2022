@@ -1,5 +1,5 @@
 import './App.css';
-import {Link, Routes, Route} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import AboutUs from './pages/AboutUs';
 import Shops from './pages/Shops';
@@ -13,18 +13,21 @@ import MaintainCategories from './pages/Admin/MaintainCategories';
 import IndividualProduct from './pages/IndividualProduct';
 import NavigationBar from './components/NavigationBar';
 import Testing from './pages/Testing';
+import { useTranslation } from 'react-i18next';
 
 function App() {
+
+  const { t } = useTranslation();
 
   return (
     <div>
       <NavigationBar />
       <Routes>
         <Route path='' element={ <Homepage /> } />
-        <Route path='admin' element={ <AdminHome /> } />
-        <Route path='meist' element={ <AboutUs /> } />
-        <Route path='poed' element={ <Shops /> } />
-        <Route path='ostukorv' element={ <Cart /> } />
+        <Route path={t('url.admin')} element={ <AdminHome /> } />
+        <Route path={t('url.about')} element={ <AboutUs /> } />
+        <Route path={t('url.shops')} element={ <Shops /> } />
+        <Route path={t('url.cart')} element={ <Cart /> } />
         <Route path='admin/lisa-toode' element={ <AddProduct /> } />  
         <Route path='admin/muuda-toode/:id' element={ <EditProduct /> } />
         <Route path='admin/halda-tooteid' element={ <MaintainProducts /> } />
