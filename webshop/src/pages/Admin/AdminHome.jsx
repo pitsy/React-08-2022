@@ -19,6 +19,9 @@ function AdminHome() {
             <Link to='/admin/halda-kategooriaid'>
                 <Button variant='dark'>Halda kategooriaid</Button>
             </Link>
+            <Link to='/admin/halda-pilte'>
+                <Button variant='dark'>Halda pilte</Button>
+            </Link>
 
             {/* <Routes>
                 <Route path='admin/lisa-toode' element={ <AddProduct /> } />

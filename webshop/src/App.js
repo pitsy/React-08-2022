@@ -14,6 +14,7 @@ import IndividualProduct from './pages/IndividualProduct';
 import NavigationBar from './components/NavigationBar';
 import Testing from './pages/Testing';
 import { useTranslation } from 'react-i18next';
+import MaintainPictures from './pages/Admin/MaintainPictures';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
         <Route path='admin/halda-tooteid' element={ <MaintainProducts /> } />
         <Route path='admin/halda-poode' element={ <MaintainShops /> } />
         <Route path='admin/halda-kategooriaid' element={ <MaintainCategories /> } />
+        <Route path='admin/halda-pilte' element={ <MaintainPictures /> } />
         <Route path='product/:name' element={ <IndividualProduct />} />
         <Route path='testing' element={ <Testing />} />
       </Routes>
