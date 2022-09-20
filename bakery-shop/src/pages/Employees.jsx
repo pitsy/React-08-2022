@@ -6,7 +6,8 @@ function Employees() {
 
   const dbUrl = 'https://reqres.in/api/users';
   const [users, setUsers] = useState([]);
-  const [message, setMessage] = useState('');
+  const [idMessage, setIdMessage] = useState('');
+  const [emailMessage, setEmailMessage] = useState('');
 
   const idRef = useRef();
   const nameRef = useRef();
@@ -23,29 +24,38 @@ function Employees() {
 
   function checkID(ref, msgIncorrectID, msgFieldEmpty) {
     if (ref.current.value === '') {
-      setMessage(msgFieldEmpty);
+      setIdMessage(msgFieldEmpty);
       return true;
     } else if (!validator.isInt(ref.current.value)) {
-      setMessage(msgIncorrectID);
+      setIdMessage(msgIncorrectID);
       return true;
     }
   }
 
   function checkEmail(ref, msgIncorrectID, msgFieldEmpty) {
     if (ref.current.value === '') {
-      setMessage(msgFieldEmpty);
+      setEmailMessage(msgFieldEmpty);
       return true;
-    } else if (!validator.isInt(ref.current.value)) {
-      setMessage(msgIncorrectID);
+    } else if (!validator.isEmail(ref.current.value)) {
+      setEmailMessage(msgIncorrectID);
       return true;
     }
   }
 
   const addEmployee = () => {
+    const name = nameRef.current.value.split(' ');
+    const first_name = name[0];
+    const last_name = name.slice(1).join(' ');
     // TODO: Add validations
     const idError = checkID(idRef, 'ID can only be a number', 'ID required')
-    const emailError = checkEmail(emailRef, 'ID can only be a number', 'ID required')
+    const emailError = checkEmail(emailRef, 'Invalid email', 'Email required')
     // TODO: Add an employee to the table
+    if (idError || emailError) {
+      return;
+    }
+
+    setEmailMessage('');
+    setIdMessage('');
   }
 
   const deleteEmployee = (employee) => {
@@ -76,15 +86,15 @@ function Employees() {
               <td>{element.id}</td>
               <td>{element.first_name} {element.last_name}</td>
               <td>{element.email}</td>
-              <img src={element.avatar} alt="" />
+              <td><img src={element.avatar} alt="" /></td>
               <td><Button type="button" variant="danger" onClick={() => deleteEmployee(index)}>Delete</Button></td>
             </tr>
           )}
 
         <tr className="input-row">
-          <td><input type="text" placeholder="ID" className="form-control" ref={idRef}/>{message}</td>
+          <td><input type="text" placeholder="ID" className="form-control" ref={idRef}/>{idMessage}</td>
           <td><input type="text" placeholder="Name" className="form-control" ref={nameRef}/></td>
-          <td><input type="text" placeholder="Email" className="form-control" ref={emailRef}/></td>
+          <td><input type="text" placeholder="Email" className="form-control" ref={emailRef}/>{emailMessage}</td>
           <td><input type="text" placeholder="Avatar" className="form-control" ref={avatarRef}/></td>
           <td><Button type="submit" variant="success" onClick={addEmployee}>Add</Button></td>
         </tr>

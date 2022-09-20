@@ -1,14 +1,17 @@
+import { useContext } from "react";
 import { useRef } from "react";
 import { useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom';
 import styles from '../css/Cart.module.css';
+import CartSumContext from "../store/CartSumContext";
 
 function Cart() {
 
     const [cart, setCart] = useState(JSON.parse(sessionStorage.getItem('cart')) || []);
     const [parcelMachines, setParcelMachines] = useState([]);
     const [selectedPM, setSelectedPM] = useState('');
+    const cartSumCtx = useContext(CartSumContext);
 
     const pmRef = useRef();
 
@@ -22,13 +25,14 @@ function Cart() {
     function removeProduct(index) {
         cart.splice(index,1);
         setCart(cart.slice()); 
-        sessionStorage.setItem('cart', JSON.stringify(cart)); 
+        sessionStorage.setItem('cart', JSON.stringify(cart));
     }
 
     // kogusumma
     function totalPrice() {
         let total = 0;
         cart.forEach(element => total = total + element.product.price * element.quantity);
+        cartSumCtx.setCartSum(total.toFixed(2));
         return total.toFixed(2);
     }
 
@@ -36,6 +40,7 @@ function Cart() {
     function emptyCart() {
         setCart([]);
         sessionStorage.setItem('cart', JSON.stringify([]));
+        cartSumCtx.setCartSum(0);
     }
 
     function decreaseQuantity(index) {

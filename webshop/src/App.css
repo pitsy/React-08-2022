@@ -57,3 +57,7 @@
     --bs-link-hover-color: black;
     --bs-pagination-border-width: 0px;
 }
+
+.login-button {
+    margin-right: 5px;
+}

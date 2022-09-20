@@ -1,6 +1,6 @@
 // import productsFromFile from '../data/products.json';
 import { Container } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import Spinner from '../components/Spinner';
 import CarouselGallery from '../components/home/CarouselGallery';
 import SortButtons from '../components/home/SortButtons';
@@ -10,6 +10,7 @@ import ProductGallery from '../components/home/ProductGallery';
 import { ToastContainer, toast } from 'react-toastify';
 import styles from '../css/Homepage.module.css';
 import { useTranslation } from 'react-i18next';
+import CartSumContext from '../store/CartSumContext';
 
 function Homepage() {
 
@@ -17,10 +18,11 @@ function Homepage() {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [dbProducts, setDbProducts] = useState([]);
     // js get unique values from array
-    const categories = [...new Set(dbProducts.map(element => element.category))];
+    const categories = [...new Set(dbProducts.map(element => element.category))].sort();
     const [activeCategory, setActiveCategory] = useState('all');
     const { t } = useTranslation();
     const [activePage, setActivePage] = useState(1);
+    const cartSumCtx = useContext(CartSumContext);
 
     // "scraping" python
 
@@ -38,7 +40,6 @@ function Homepage() {
     function addToCart(productClicked) {
         let cart = sessionStorage.getItem('cart'); // sessionStorage kaob brauseri sulgemisel
         cart = JSON.parse(cart) || [];
-        console.log(cart);
         const index = cart.findIndex(element => element.product.id === productClicked.id);
         if (index >= 0) {
             // suurenda kogust
@@ -47,6 +48,10 @@ function Homepage() {
         } else {
             cart.push({product: productClicked, quantity: 1});
         }
+        let total = 0;
+        cart.forEach(element => total = total + element.product.price * element.quantity);
+        cartSumCtx.setCartSum(total.toFixed(2));
+
         cart = JSON.stringify(cart);
         sessionStorage.setItem('cart', cart);
         toast.success(productClicked.name + t('toast.cart-added'), {
