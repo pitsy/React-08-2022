@@ -38,6 +38,11 @@ function NavigationBar() {
                         <Button className='login-button' variant='light'>Log in</Button>
                     </Link>                
                 }
+                { !authCtx.isLoggedIn && 
+                    <Link to='signup'>
+                        <Button className='login-button' variant='light'>Sign up</Button>
+                    </Link>                
+                }
                 { authCtx.isLoggedIn && <Button className='login-button' variant='light' onClick={() => authCtx.updateLoggedIn(false)}>Log out</Button>}
                 <span>Cart: {cartSumCtx.cartSum}€ </span>
                 <img className='lang' onClick={() => updateLanguage('en')} src={require('../images/uk.png')} alt='' />

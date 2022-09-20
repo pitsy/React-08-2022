@@ -18,6 +18,7 @@ import MaintainPictures from './pages/Admin/MaintainPictures';
 import Login from './pages/Login';
 import AuthContext from './store/AuthContext';
 import { useContext } from 'react';
+import Signup from './pages/Signup';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
         <Route path={t('url.shops')} element={ <Shops /> } />
         <Route path={t('url.cart')} element={ <Cart /> } />
         <Route path='logi-sisse' element={ <Login /> } />
+        <Route path='signup' element={ <Signup /> } />
         <Route path='testing' element={ <Testing />} />
         <Route path='product/:name' element={ <IndividualProduct />} />
         { authCtx.isLoggedIn && <>
