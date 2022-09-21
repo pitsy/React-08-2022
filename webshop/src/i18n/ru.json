@@ -12,5 +12,11 @@
     "url.admin": "administratom",
     "url.about": "onas",
     "url.shops": "magaziny",
-    "url.cart": "korzina"
+    "url.cart": "korzina",
+    "INVALID_EMAIL": "Vale kujuga e-mail RUS",
+    "EMAIL_NOT_FOUND": "Sellise e-mailiga kasutajat ei leitud RUS",
+    "EMAIL_EXISTS": "E-mail voetud RUS",
+    "MISSING_PASSWORD": "Parool puudub RUS",
+    "INVALID_PASSWORD": "Vale parool RUS",
+    "WEAK_PASSWORD : Password should be at least 6 characters": "Nork parool RUS" 
 }

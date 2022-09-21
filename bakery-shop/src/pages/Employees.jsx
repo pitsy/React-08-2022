@@ -8,6 +8,8 @@ function Employees() {
   const [users, setUsers] = useState([]);
   const [idMessage, setIdMessage] = useState('');
   const [emailMessage, setEmailMessage] = useState('');
+  const [nameMessage, setNameMessage] = useState('');
+  const [avatarMessage, setAvatarMessage] = useState('');
 
   const idRef = useRef();
   const nameRef = useRef();
@@ -42,20 +44,51 @@ function Employees() {
     }
   }
 
+  function checkName(ref, msgIncorrectID, msgFieldEmpty) {
+    if (ref.current.value === '') {
+      setNameMessage(msgFieldEmpty);
+      return true;
+    } else if (!validator.isAlpha(ref.current.value)) {
+      setNameMessage(msgIncorrectID);
+      return true;
+    }
+  }
+
+  function checkAvatar(ref, msgFieldEmpty) {
+    if (ref.current.value === '') {
+      setAvatarMessage(msgFieldEmpty);
+      return true;
+    } 
+  }
+
   const addEmployee = () => {
     const name = nameRef.current.value.split(' ');
-    const first_name = name[0];
-    const last_name = name.slice(1).join(' ');
+    const firstName = name[0];
+    const lastName = name.slice(1).join(' ');
     // TODO: Add validations
-    const idError = checkID(idRef, 'ID can only be a number', 'ID required')
-    const emailError = checkEmail(emailRef, 'Invalid email', 'Email required')
+    const idError = checkID(idRef, 'ID can only be a number', 'ID required');
+    const emailError = checkEmail(emailRef, 'Invalid email', 'Email required');
+    const nameError = checkName(nameRef, 'Name should contain only letters', 'Name required');
+    const avatarError = checkAvatar(nameRef, 'Avatar required');
     // TODO: Add an employee to the table
-    if (idError || emailError) {
+    if (idError || emailError || nameError || avatarError) {
       return;
     }
 
+    const newUser = {
+      id: Number(idRef.current.value),
+      first_name: firstName,
+      last_name: lastName,
+      email: emailRef.current.value,
+      avatar: avatarRef.current.value
+    }
+    users.push(newUser);
+    setUsers(users.slice());
+
     setEmailMessage('');
     setIdMessage('');
+    setNameMessage('');
+    setAvatarMessage('');
   }
 
   const deleteEmployee = (employee) => {
@@ -93,9 +126,9 @@ function Employees() {
 
         <tr className="input-row">
           <td><input type="text" placeholder="ID" className="form-control" ref={idRef}/>{idMessage}</td>
-          <td><input type="text" placeholder="Name" className="form-control" ref={nameRef}/></td>
+          <td><input type="text" placeholder="Name" className="form-control" ref={nameRef}/>{nameMessage}</td>
           <td><input type="text" placeholder="Email" className="form-control" ref={emailRef}/>{emailMessage}</td>
-          <td><input type="text" placeholder="Avatar" className="form-control" ref={avatarRef}/></td>
+          <td><input type="text" placeholder="Avatar" className="form-control" ref={avatarRef}/>{avatarMessage}</td>
           <td><Button type="submit" variant="success" onClick={addEmployee}>Add</Button></td>
         </tr>
         </tbody>

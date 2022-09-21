@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom';
 import styles from '../css/Cart.module.css';
 import CartSumContext from "../store/CartSumContext";
+import emailjs from 'emailjs-com';
 
 function Cart() {
 
@@ -21,11 +22,28 @@ function Cart() {
             .then(data => setParcelMachines(data.filter(e => e.A0_NAME === 'EE') || []))
     }, []);
 
+    const templateParams = {
+        message: 'Keegi tegi tellimuse summas: ' + totalPrice(),
+        from_name: 'Mihkel',
+        to_name: 'Webshop',
+        to_email: 'rainer.pits@gmail.com',
+    };
+
+    function sendEmail() {    
+        emailjs.send('service_te0gqhi', 'template_g37h4uy', templateParams, 'N81kjonDYPn1JTXa0')
+            .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            }, function(error) {
+            console.log('FAILED...', error);
+        });
+    };
+
     // eemaldamine 
     function removeProduct(index) {
         cart.splice(index,1);
         setCart(cart.slice()); 
         sessionStorage.setItem('cart', JSON.stringify(cart));
+        cartSumCtx.setCartSum(totalPrice());
     }
 
     // kogusumma
@@ -50,6 +68,7 @@ function Cart() {
         }
         setCart(cart.slice()); 
         sessionStorage.setItem('cart', JSON.stringify(cart)); 
+        cartSumCtx.setCartSum(totalPrice());
     }
 
     function increaseQuantity(index) {
@@ -100,6 +119,7 @@ function Cart() {
             </div>}
             { cart.length > 0 && <div className={styles.info}>{totalPrice()} €</div>}
             <br />
+            <div className={styles.info}><button onClick={sendEmail}>Kinnita tellimus</button></div>
         </div> );
 }
 

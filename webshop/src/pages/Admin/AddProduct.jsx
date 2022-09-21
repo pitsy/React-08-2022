@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 // import productsFromFile from '../../data/products.json';
 import { ToastContainer, toast } from 'react-toastify';
+import FileUpload from '../../components/FileUpload';
+import {ButtonGroup, ToggleButton} from 'react-bootstrap';
 
 function AddProduct() {
 
@@ -15,6 +17,7 @@ function AddProduct() {
     const [categories, setCategories] = useState([]);
     const [idUnique, setIdUnique] = useState(true);
     const [message, setMessage] = useState('');
+    const [image, setImage] = useState('');
 
     useEffect(() => {
         fetch('https://react0922-default-rtdb.europe-west1.firebasedatabase.app/products.json')
@@ -35,12 +38,12 @@ function AddProduct() {
 
     function addNewProduct() {
         const descNotFilled = checkIfFilled(descriptionRef, 'Kirjeldus on taitmata');
-        const imgNotFilled = checkIfFilled(imageRef, 'Pilt on taitmata');
+        // const imgNotFilled = checkIfFilled(imageRef, 'Pilt on taitmata');
         const priceNotFilled = checkIfFilled(priceRef, 'Hind on taitmata');
         const nameNotFilled = checkIfFilled(nameRef, 'Nimi on taitmata');
         const idNotFilled = checkIfFilled(idRef, 'ID on taitmata');
 
-        if (idNotFilled || imgNotFilled || priceNotFilled || nameNotFilled || descNotFilled) {
+        if (idNotFilled || priceNotFilled || nameNotFilled || descNotFilled) {
             return;
         }
 
@@ -50,7 +53,7 @@ function AddProduct() {
             price: Number(priceRef.current.value),
             description: descriptionRef.current.value,
             category: categoryRef.current.value,
-            image: imageRef.current.value,
+            image: showImage === 'url' ? imageRef.current.value : image,
             active: activeRef.current.checked,
         }
         // productsFromFile.push(newProduct);
@@ -64,7 +67,7 @@ function AddProduct() {
         priceRef.current.value = '';
         descriptionRef.current.value = '';
         categoryRef.current.value = '';
-        imageRef.current.value = '';
+        // imageRef.current.value = '';
         activeRef.current.value = '';
         toast.success("Uus toode edukalt lisatud!")
     }
@@ -79,6 +82,8 @@ function AddProduct() {
             setIdUnique(true);
         }
     }
+
+    const [showImage, setShowImage] = useState('upload');
 
     return ( 
         <div>
@@ -99,7 +104,32 @@ function AddProduct() {
             </select> <br />
             {/* <input ref={categoryRef} type="text" /> <br /> */}
             <label>Pilt </label> <br />
-            <input ref={imageRef} type="text" /> <br />
+            <ButtonGroup className="mb-2">
+                <ToggleButton
+                    id="url"
+                    type="radio"
+                    variant="outline-dark"
+                    name="radio"
+                    value="url"
+                    checked={showImage === "url"}
+                    onChange={() => setShowImage('url')}
+                >
+                    URL
+                </ToggleButton>
+                <ToggleButton 
+                    id="upload"
+                    type="radio"
+                    variant="outline-dark"
+                    name="radio"
+                    value="upload"
+                    checked={showImage === "upload"}
+                    onChange={() => setShowImage('upload')}
+                >
+                    Upload
+                </ToggleButton>
+            </ButtonGroup>
+            {showImage === 'url' && <div><input ref={imageRef} type="text" /></div> } 
+            {showImage === 'upload' && <FileUpload onSendPictureUrl={setImage}/>}
             <label>Aktiivne </label> <br />
             <input ref={activeRef} type="checkbox" /> <br />
             <button disabled={!idUnique} onClick={addNewProduct}>Lisa toode</button>
