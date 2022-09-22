@@ -32,7 +32,7 @@ function Homepage() {
             .then(data => {
                 setProducts(data.slice(0,20) || []);
                 setFilteredProducts(data || []);
-                setDbProducts(data || []);
+                setDbProducts(data || []);   
             });
     }, []);
 
