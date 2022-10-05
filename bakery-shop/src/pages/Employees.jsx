@@ -19,37 +19,37 @@ function Employees() {
   useEffect(() => {
     fetch(dbUrl)
         .then(res => res.json())
-        .then(data => {
-            setUsers(data.data || [])
+        .then(json => {
+            setUsers(json.data || [])
         });
   }, []);
 
-  function checkID(ref, msgIncorrectID, msgFieldEmpty) {
+  function checkID(ref, msgIncorrect, msgFieldEmpty) {
     if (ref.current.value === '') {
       setIdMessage(msgFieldEmpty);
       return true;
     } else if (!validator.isInt(ref.current.value)) {
-      setIdMessage(msgIncorrectID);
+      setIdMessage(msgIncorrect);
       return true;
     }
   }
 
-  function checkEmail(ref, msgIncorrectID, msgFieldEmpty) {
+  function checkEmail(ref, msgIncorrect, msgFieldEmpty) {
     if (ref.current.value === '') {
       setEmailMessage(msgFieldEmpty);
       return true;
     } else if (!validator.isEmail(ref.current.value)) {
-      setEmailMessage(msgIncorrectID);
+      setEmailMessage(msgIncorrect);
       return true;
     }
   }
 
-  function checkName(ref, msgIncorrectID, msgFieldEmpty) {
+  function checkName(ref, msgIncorrect, msgFieldEmpty) {
     if (ref.current.value === '') {
       setNameMessage(msgFieldEmpty);
       return true;
-    } else if (!validator.isAlpha(ref.current.value)) {
-      setNameMessage(msgIncorrectID);
+    } else if (!validator.isAlpha(ref.current.value.replaceAll(' ', '').replaceAll('-', ''))) {
+      setNameMessage(msgIncorrect);
       return true;
     }
   }
@@ -94,6 +94,7 @@ function Employees() {
   const deleteEmployee = (employee) => {
     users.splice(employee,1);
     setUsers(users.slice());
+    // const index may be better option
     // fetch(dbUrl, {
     //         method: 'PUT',
     //         body: JSON.stringify(users)
@@ -117,7 +118,8 @@ function Employees() {
           {users.map((element, index) => 
             <tr key={element.id}>
               <td>{element.id}</td>
-              <td>{element.first_name} {element.last_name}</td>
+              <td>{element.first_name} {element.last_name}</td> 
+              {/* ^^ can add {element.name} */}
               <td>{element.email}</td>
               <td><img src={element.avatar} alt="" /></td>
               <td><Button type="button" variant="danger" onClick={() => deleteEmployee(index)}>Delete</Button></td>
