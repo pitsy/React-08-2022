@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 
 function Products() {
@@ -18,6 +18,11 @@ function Products() {
     { name: 'Croissant', price: 1.8, quantity: 1, store: 'Lasnamäe store' },
     { name: 'Chocolate chip cookie', price: 3.25, quantity: 3, store: 'Mustamäe store' }
   ]);
+
+  useEffect(() => {
+    products.sort((a,b) => a.price - b.price);
+    setProducts(products.slice());
+  }, []);
 
   const addProduct = () => {
     const newProduct = {
@@ -46,10 +51,10 @@ function Products() {
         {/* TODO: Order the products by price */}
         {products.map(product => 
             <tr key={product.name + product.price}>
-              <td>{product.name}</td>
+              <th>{product.name}</th> {/* label first column as header to set the font weight to bold */}
               <td>{product.price}</td>
               {/*  TODO: Display the quantity in red if it is lower than 3 */}
-              <td>{product.quantity}</td> 
+              <td className={product.quantity < 3 ? 'under-three' : undefined}>{product.quantity}</td>
               <td>{product.store}</td>
             </tr>
           )}

@@ -117,7 +117,7 @@ function Employees() {
         <tbody>
           {users.map((element, index) => 
             <tr key={element.id}>
-              <td>{element.id}</td>
+              <th>{element.id}</th> {/* label first column as header to set the font weight to bold */}
               <td>{element.first_name} {element.last_name}</td> 
               {/* ^^ can add {element.name} */}
               <td>{element.email}</td>
