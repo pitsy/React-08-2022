@@ -24,6 +24,8 @@ function Employees() {
         });
   }, []);
 
+  console.log('aaaa');
+
   function checkID(ref, msgIncorrect, msgFieldEmpty) {
     if (ref.current.value === '') {
       setIdMessage(msgFieldEmpty);
@@ -117,7 +119,7 @@ function Employees() {
         <tbody>
           {users.map((element, index) => 
             <tr key={element.id}>
-              <th>{element.id}</th> {/* label first column as header to set the font weight to bold */}
+              <td>{element.id}</td> {/* label first column as header to set the font weight to bold */}
               <td>{element.first_name} {element.last_name}</td> 
               {/* ^^ can add {element.name} */}
               <td>{element.email}</td>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 
 function Products() {
@@ -17,12 +17,9 @@ function Products() {
     { name: 'Bread', price: 5, quantity: 10, store: 'Lasnamäe store' },
     { name: 'Croissant', price: 1.8, quantity: 1, store: 'Lasnamäe store' },
     { name: 'Chocolate chip cookie', price: 3.25, quantity: 3, store: 'Mustamäe store' }
-  ]);
-
-  useEffect(() => {
-    products.sort((a,b) => a.price - b.price);
-    setProducts(products.slice());
-  }, []);
+  ] );
+  
+  // products..sort((a,b) => a.price - b.price);
 
   const addProduct = () => {
     const newProduct = {
@@ -49,9 +46,9 @@ function Products() {
         </thead>
         <tbody>
         {/* TODO: Order the products by price */}
-        {products.map(product => 
+        {products.sort((a,b) => a.price - b.price).map(product => 
             <tr key={product.name + product.price}>
-              <th>{product.name}</th> {/* label first column as header to set the font weight to bold */}
+              <td>{product.name}</td> {/* label first column as header to set the font weight to bold */}
               <td>{product.price}</td>
               {/*  TODO: Display the quantity in red if it is lower than 3 */}
               <td className={product.quantity < 3 ? 'under-three' : undefined}>{product.quantity}</td>

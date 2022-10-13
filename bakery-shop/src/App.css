@@ -2,3 +2,7 @@
 .under-three {
     color: red;
 }
+
+td:first-child {
+    font-weight: bold;
+  }
