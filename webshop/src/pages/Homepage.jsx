@@ -94,7 +94,7 @@ function Homepage() {
                     categories={categories}
                 />
 
-                <Container>
+                <Container>   
 
                     <SortButtons 
                         fProducts={filteredProducts}
