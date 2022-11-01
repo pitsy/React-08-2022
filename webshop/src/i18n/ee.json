@@ -18,5 +18,21 @@
     "EMAIL_EXISTS": "E-mail voetud",
     "MISSING_PASSWORD": "Parool puudub",
     "INVALID_PASSWORD": "Vale parool",
-    "WEAK_PASSWORD : Password should be at least 6 characters": "Nork parool"     
+    "WEAK_PASSWORD : Password should be at least 6 characters": "Nork parool",    
+    "add.to.cart": "Lisa ostukorvi",
+    "products.length": "Tooteid",
+    "navbar.login": "Logi sisse",
+    "navbar.signin": "Loo kasutaja",
+    "cart.empty-message": "Ostukorv on tühi",
+    "cart.empty-button": "Tühjenda ostukorv",
+    "cart.items": "tooteid",
+    "cart.parcel-machines": "Pakiautomaadid",
+    "cart.selected-parcelm": "Valitud pakiautomaat",
+    "cart.confirm": "Kinnita tellimus",
+    "cart.quantity": "Kogus",
+    "cart.price": "Hind",
+    "cart.total-price": "Hind kokku",
+    "about-us.title": "Meist",
+    "shops.all-stores": "Kõik poed",
+    "shops.all-tallinn-stores": "Kõik Tallinna poed"   
 }

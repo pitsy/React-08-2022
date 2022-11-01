@@ -61,10 +61,14 @@ function EditProduct() {
             active: activeRef.current.checked,
         }
         products[index] = newProduct;
+
+        // commented out for firebase version
+
         fetch('https://react0922-default-rtdb.europe-west1.firebasedatabase.app/products.json', {
             method: 'PUT',
             body: JSON.stringify(products),
-        }).then(() => navigate('/admin/halda-tooteid')); //!!! navigatib ainult siis kui fetchitud on !!!
+        }).then(() => navigate('/admin/halda-tooteid')); 
+        //!!! navigatib ainult siis kui fetchitud on !!!
     }
 
     function checkIdUniqueness() {
@@ -83,26 +87,26 @@ function EditProduct() {
             <div>{message}</div>
             {productFound !== undefined && 
             <div>
-                { !idUnique && <div>Sisestasid mitteunikaalse ID!</div>}
+                { !idUnique && <div>ID not unique!</div>}
                 <label>ID </label> <br />
                 <input onChange={checkIdUniqueness} ref={idRef} defaultValue={productFound.id} type="number" /> <br />
-                <label>Nimi </label> <br />
+                <label>Name </label> <br />
                 <input ref={nameRef} defaultValue={productFound.name} type="text" /> <br />
-                <label>Hind </label> <br />
+                <label>Price </label> <br />
                 <input ref={priceRef} defaultValue={productFound.price} type="number" /> <br />
-                <label>Kirjeldus </label> <br />
+                <label>Description </label> <br />
                 <input ref={descriptionRef} defaultValue={productFound.description} type="text" /> <br />
-                <label>Kategooria </label> <br />
+                <label>Category </label> <br />
                 <select ref={categoryRef} defaultValue={productFound.category}>
                     {categories.map(element => <option key={element.name}>{element.name}</option>)}
                 </select> <br />
-                <label>Pilt </label> <br />
+                <label>Image </label> <br />
                 <input ref={imageRef} defaultValue={productFound.image} type="text" /> <br />
-                <label>Aktiivne </label> <br />
+                <label>Active </label> <br />
                 <input ref={activeRef} defaultValue={productFound.active} type="checkbox" /> <br />
-                <button disabled={!idUnique} onClick={updateProduct}>Muuda toode</button>
+                <button disabled={!idUnique} onClick={updateProduct}>Edit product</button>
             </div>}
-            {productFound === undefined && <div>Toodet ei leitud</div>}
+            {productFound === undefined && <div>Product not found</div>}
         </div> );                
 }
 

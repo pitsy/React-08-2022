@@ -18,5 +18,21 @@
     "EMAIL_EXISTS": "E-mail voetud RUS",
     "MISSING_PASSWORD": "Parool puudub RUS",
     "INVALID_PASSWORD": "Vale parool RUS",
-    "WEAK_PASSWORD : Password should be at least 6 characters": "Nork parool RUS" 
+    "WEAK_PASSWORD : Password should be at least 6 characters": "Nork parool RUS",
+    "add.to.cart": "Добавить в корзину",
+    "products.length": "Продукты",
+    "navbar.login": "Войти",
+    "navbar.signin": "Pегистрировать",
+    "cart.empty-message": "Корзина пуста",
+    "cart.empty-button": "Очистить корзину",
+    "cart.items": "товары",
+    "cart.parcel-machines": "Посылочные автоматы",
+    "cart.selected-parcelm": "Выбранный посылочный автомат",
+    "cart.confirm": "Подтверждать",
+    "cart.quantity": "Количество",
+    "cart.price": "Цена",
+    "cart.total-price": "Итоговая цена",
+    "about-us.title": "О нас",
+    "shops.all-stores": "Все магазины",
+    "shops.all-tallinn-stores": "Все магазины Таллинна"     
 }

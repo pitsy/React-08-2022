@@ -37,11 +37,11 @@ function AddProduct() {
     }
 
     function addNewProduct() {
-        const descNotFilled = checkIfFilled(descriptionRef, 'Kirjeldus on taitmata');
+        const descNotFilled = checkIfFilled(descriptionRef, 'Description not filled');
         // const imgNotFilled = checkIfFilled(imageRef, 'Pilt on taitmata');
-        const priceNotFilled = checkIfFilled(priceRef, 'Hind on taitmata');
-        const nameNotFilled = checkIfFilled(nameRef, 'Nimi on taitmata');
-        const idNotFilled = checkIfFilled(idRef, 'ID on taitmata');
+        const priceNotFilled = checkIfFilled(priceRef, 'Price not filled');
+        const nameNotFilled = checkIfFilled(nameRef, 'Name not filled');
+        const idNotFilled = checkIfFilled(idRef, 'ID not filled');
 
         if (idNotFilled || priceNotFilled || nameNotFilled || descNotFilled) {
             return;
@@ -58,6 +58,9 @@ function AddProduct() {
         }
         // productsFromFile.push(newProduct);
         products.push(newProduct);
+
+        // commented out for firebase version
+
         fetch('https://react0922-default-rtdb.europe-west1.firebasedatabase.app/products.json', {
             method: 'PUT',
             body: JSON.stringify(products),
@@ -69,7 +72,7 @@ function AddProduct() {
         categoryRef.current.value = '';
         // imageRef.current.value = '';
         activeRef.current.value = '';
-        toast.success("Uus toode edukalt lisatud!")
+        toast.success("New product added successfully")
     }
 
     function checkIdUniqueness() {
@@ -88,22 +91,22 @@ function AddProduct() {
     return ( 
         <div>
             <ToastContainer />
-            { !idUnique && <div>Sisestasid mitteunikaalse ID!</div>}
+            { !idUnique && <div>ID not unique</div>}
             <div>{message}</div>
             <label>ID </label> <br />
             <input onChange={checkIdUniqueness} ref={idRef} type="number" /> <br />
-            <label>Nimi </label> <br />
+            <label>Name </label> <br />
             <input ref={nameRef} type="text" /> <br />
-            <label>Hind </label> <br />
+            <label>Price </label> <br />
             <input ref={priceRef} type="number" /> <br />
-            <label>Kirjeldus </label> <br />
+            <label>Description </label> <br />
             <input ref={descriptionRef} type="text" /> <br />
-            <label>Kategooria </label> <br />
+            <label>Category </label> <br />
             <select ref={categoryRef}>
                 {categories.map(element => <option key={element.name}>{element.name}</option>)}
-            </select> <br />
+            </select> <br /> <br />
             {/* <input ref={categoryRef} type="text" /> <br /> */}
-            <label>Pilt </label> <br />
+            <label>Image </label> <br />
             <ButtonGroup className="mb-2">
                 <ToggleButton
                     id="url"
@@ -130,9 +133,9 @@ function AddProduct() {
             </ButtonGroup>
             {showImage === 'url' && <div><input ref={imageRef} type="text" /></div> } 
             {showImage === 'upload' && <FileUpload onSendPictureUrl={setImage}/>}
-            <label>Aktiivne </label> <br />
-            <input ref={activeRef} type="checkbox" /> <br />
-            <button disabled={!idUnique} onClick={addNewProduct}>Lisa toode</button>
+            <label>Active </label> <br />
+            <input ref={activeRef} type="checkbox" /> <br /> <br />
+            <button disabled={!idUnique} onClick={addNewProduct}>Add new product</button>
         </div> );
 }
 

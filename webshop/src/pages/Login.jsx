@@ -43,12 +43,12 @@ function Login() {
     }
 
     return ( 
-        <div>
+        <div className="login-page">
             <div>{message}</div>
-            <label>E-mail</label> <br />
+            <label>Email</label> <br />
             <input ref={emailRef} type="text" /> <br />
             <label>Password</label> <br />
-            <input ref={passwordRef} type="password" /> <br />
+            <input ref={passwordRef} type="password" /> <br /> <br />
             <button onClick={login}>Log in</button>
         </div> );
 }

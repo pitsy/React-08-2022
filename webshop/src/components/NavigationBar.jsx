@@ -34,17 +34,17 @@ function NavigationBar() {
                 </Nav>
                 </Container>
                 { !authCtx.isLoggedIn && 
-                    <Link to='logi-sisse'>
-                        <Button className='login-button' variant='light'>Log in</Button>
+                    <Link to='login'>
+                        <Button className='login-button' variant='light'>{t('navbar.login')}</Button>
                     </Link>                
                 }
                 { !authCtx.isLoggedIn && 
                     <Link to='signup'>
-                        <Button className='login-button' variant='light'>Sign up</Button>
+                        <Button className='login-button' variant='light'>{t('navbar.signin')}</Button>
                     </Link>                
                 }
                 { authCtx.isLoggedIn && <Button className='login-button' variant='light' onClick={() => authCtx.updateLoggedIn(false)}>Log out</Button>}
-                <span>Cart: {cartSumCtx.cartSum}€ </span>
+                <Nav.Link as={Link} to={'/' + t('url.cart')} className='cart-price'>{t('navbar.cart-button')}: {cartSumCtx.cartSum} $ </Nav.Link>
                 <img className='lang' onClick={() => updateLanguage('en')} src={require('../images/uk.png')} alt='' />
                 <img className='lang' onClick={() => updateLanguage('ee')} src={require('../images/estonia.png')} alt='' />
                 <img className='lang' onClick={() => updateLanguage('ru')} src={require('../images/russia.png')} alt='' />

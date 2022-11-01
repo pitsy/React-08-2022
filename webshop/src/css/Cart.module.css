@@ -23,11 +23,11 @@
 }
 
 .name {
-    width: 300px;
+    width: 200px;
 }
 
 .price {
-    width: 90px;
+    width: 110px;
 }
 
 .total {
@@ -35,7 +35,7 @@
 }
 
 .quantity {
-    width: 90px;
+    width: 120px;
 }
 
 .quanitityControls {

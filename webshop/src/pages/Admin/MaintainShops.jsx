@@ -44,7 +44,7 @@ function MaintainShops() {
         openTimeRef.current.value = '';
         latitudeRef.current.value = '';
         longitudeRef.current.value = '';
-        toast.success('Pood lisatud');
+        toast.success('Store added');
     }
 
     function deleteShop(shop) {
@@ -59,20 +59,20 @@ function MaintainShops() {
                 'Content-Type': 'application/json'
             }
         })
-        toast.error('Pood kustutatud');
+        toast.error('Store deleted');
     }
 
     return ( 
         <div>
-            <label>Poe nimi</label> <br />
+            <label>Shop name</label> <br />
             <input ref={shopRef} type="text" /> <br />
-            <label>Poe lahtiolekuaeg</label> <br />
+            <label>Shop open times</label> <br />
             <input ref={openTimeRef} type="text" /> <br />
-            <label>Poe laiuskraad</label> <br />
+            <label>Shop latitude</label> <br />
             <input ref={latitudeRef} type="text" /> <br />
-            <label>Poe pikkuskraad</label> <br />
+            <label>Shop longitude</label> <br />
             <input ref={longitudeRef} type="text" /> <br /><br />
-            <button onClick={() => addShop()}>Lisa</button>
+            <button onClick={() => addShop()}>Add</button>
             <br /><br />
             {shops.map(element =>
                 <div>

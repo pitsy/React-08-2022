@@ -44,14 +44,16 @@ function Signup() {
     }
 
     return ( 
-    <div>
-    <ToastContainer />
-    <div>{message}</div>
-    <label>E-mail</label> <br />
-    <input ref={emailRef} type="text" /> <br />
-    <label>Parool</label> <br />
-    <input ref={passwordRef} type="password" /> <br />
-    <button onClick={signup}>Lisa uus kasutaja</button>
+    <div className="login-page">
+        <ToastContainer />
+        <div>{message}</div>
+        <label>Email</label> <br />
+        <input ref={emailRef} type="text" /> <br />
+        <label>Password</label> <br />
+        <input ref={passwordRef} type="password" /> <br /> <br />
+        <button onClick={signup}>Create new account</button>
+        <br /> <br />
+        Create a new account and log in to view admin features
     </div> );
 }
 

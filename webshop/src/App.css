@@ -30,7 +30,8 @@
 }
 
 .carousel {
-    width: 700px;
+    width: 80%;
+    max-width: 1200px;
     margin: auto;
 }
 
@@ -61,4 +62,16 @@
 .login-button {
     margin-right: 15px;
     width: 80px;
+}
+
+.cart-price {
+    margin-left: 40px;
+}
+
+.admin-button {
+    margin: 15px 10px 0 0;
+}
+
+.login-page {
+    margin: 15px 0 0 30px;
 }

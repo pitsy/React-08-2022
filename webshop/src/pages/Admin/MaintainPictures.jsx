@@ -34,7 +34,7 @@ function MaintainPictures() {
                 'Content-Type': 'application/json'
             }
         })
-        toast.error('Pilt kustutatud');
+        toast.error('Picture deleted');
     }
 
     function addPicture() {
@@ -59,20 +59,20 @@ function MaintainPictures() {
         altRef.current.value = '';
         headerRef.current.value = '';
         textRef.current.value = '';
-        toast.success('Pilt lisatud');
+        toast.success('Picture added');
     }
 
     return ( 
         <div>  
-            <label>Pildi url</label> <br />
+            <label>Picture url</label> <br />
             <input ref={urlRef} type="text" /> <br />
-            <label>Pildi alt tekst</label> <br />
+            <label>Picture alt text</label> <br />
             <input ref={altRef} type="text" /> <br />
-            <label>Pildi header</label> <br />
+            <label>Picture header</label> <br />
             <input ref={headerRef} type="text" /> <br />
-            <label>Pildi tekst</label> <br />
+            <label>Picture description</label> <br />
             <input ref={textRef} type="text" /> <br /><br />
-            <button onClick={() => addPicture()}>Lisa</button>
+            <button onClick={() => addPicture()}>Add</button>
             <br /><br />
             {pictures.map(element =>
                 <div>

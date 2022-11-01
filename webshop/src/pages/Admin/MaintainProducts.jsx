@@ -28,7 +28,7 @@ function MaintainProducts() {
             method: 'PUT',
             body: JSON.stringify(dbProducts)
         });
-        toast.success("Toode edukalt kustutatud!", {
+        toast.success("Product successfully deleted", {
             theme: 'dark',
             position: 'bottom-right'
         });
@@ -56,7 +56,7 @@ function MaintainProducts() {
         <div>
             <ToastContainer />
             <div className='search'>
-                <span>Otsi tooteid: </span><input type="text" ref={searchedRef} onChange={searchProducts} />
+                <span>Search products: </span><input type="text" ref={searchedRef} onChange={searchProducts} />
                 <span> {products.length}</span>
             </div>            
             {products.map(element =>
@@ -72,7 +72,7 @@ function MaintainProducts() {
                     </div>
                     <button onClick={() => deleteProduct(element)}>X</button>
                     <Link to={'/admin/muuda-toode/' + element.id}>
-                        <button>Muuda toode</button>
+                        <button>Edit product</button>
                     </Link>
                 </div> )}
         </div> );

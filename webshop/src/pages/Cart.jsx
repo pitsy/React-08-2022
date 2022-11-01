@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import styles from '../css/Cart.module.css';
 import CartSumContext from "../store/CartSumContext";
 import emailjs from 'emailjs-com';
+import { useTranslation } from 'react-i18next';
 
 function Cart() {
 
@@ -13,6 +14,7 @@ function Cart() {
     const [parcelMachines, setParcelMachines] = useState([]);
     const [selectedPM, setSelectedPM] = useState('');
     const cartSumCtx = useContext(CartSumContext);
+    const { t } = useTranslation();
 
     const pmRef = useRef();
 
@@ -26,7 +28,7 @@ function Cart() {
         message: 'Keegi tegi tellimuse summas: ' + totalPrice(),
         from_name: 'Mihkel',
         to_name: 'Webshop',
-        to_email: 'rainer.pits@gmail.com',
+        to_email: '',
     };
 
     function sendEmail() {    
@@ -87,10 +89,10 @@ function Cart() {
     return ( 
         <div>
             <br />
-            { cart.length === 0 && <div className={styles.info}>Ostukorv on tuhi!</div> }
-            { cart.length > 0 && <div className={styles.info}>{totalQuantity()} items</div>}
+            { cart.length === 0 && <div className={styles.info}>{t('cart.empty-message')}</div> }
+            { cart.length > 0 && <div className={styles.info}>{totalQuantity()} {t('cart.items')}</div>}
             <br />
-            <div className={styles.info}>{ cart.length > 0 && <Button variant='dark' onClick={emptyCart}>Empty cart</Button>}</div>            <br /><br />
+            <div className={styles.info}>{ cart.length > 0 && <Button variant='dark' onClick={emptyCart}>{t('cart.empty-button')}</Button>}</div>            <br /><br />
             {cart.map((element, index) => 
                 <div className={styles.product} key={element.product.id}>
                     <Link className={styles.link} to={'/product/' + element.name}>
@@ -99,25 +101,25 @@ function Cart() {
                     </Link>
                     <div className={styles.quanitityControls}>
                         <img className={styles.button} onClick={() => decreaseQuantity(index)} src={require('../images/minus.png')} alt='' />
-                        <span className={styles.quantity}> Quantity: {element.quantity} </span>
+                        <span className={styles.quantity}> {t('cart.quantity')}: {element.quantity} </span>
                         <img className={styles.button} onClick={() => increaseQuantity(index)} src={require('../images/plus.png')} alt='' />
                     </div>
-                    <div className={styles.price}>Price: {element.product.price} €</div>
-                    <div className={styles.total}>Total price: {(element.product.price * element.quantity).toFixed(2)} €</div>
+                    <div className={styles.price}>{t('cart.price')}: {element.product.price} $</div>
+                    <div className={styles.total}>{t('cart.total-price')}: {(element.product.price * element.quantity).toFixed(2)} $</div>
                     <img className={styles.button} onClick={() => removeProduct(index)} src={require('../images/remove.png')} alt='' />
                     <br /><br />
                 </div>
             )}
             { cart.length > 0 && <div className={styles.product}>
-                <div>Parcel machines:</div>
+                <div>{t('cart.parcel-machines')}:</div>
                 <select onChange={pmSelected} ref={pmRef}>
                     { parcelMachines.map(element => <option>{element.NAME}</option> ) }
                 </select>
-                { selectedPM !== '' && <div>Chosen parcel machine: {selectedPM}</div>}
+                { selectedPM !== '' && <div>{t('cart.selected-parcelm')}: {selectedPM}</div>}
             </div>}
-            { cart.length > 0 && <div className={styles.info}>{totalPrice()} €</div>}
+            { cart.length > 0 && <div className={styles.info}>{totalPrice()} $</div>}
             <br />
-            <div className={styles.info}><Button variant='dark' onClick={sendEmail}>Confirm order</Button></div>
+            { cart.length > 0 && <div className={styles.info}><Button variant='dark' onClick={sendEmail}>{t('cart.confirm')}</Button></div> }
             <br /><br />
         </div> );
 }

@@ -1,8 +1,12 @@
 import {Link} from 'react-router-dom';
 import { Button, Card } from 'react-bootstrap';
 import styles from '../../css/Homepage.module.css';
+import { useTranslation } from 'react-i18next';
 
 function ProductGallery(props) {
+
+    const { t } = useTranslation();
+
     return ( 
         <div>  
             <div className={styles.gridContainer}>
@@ -18,7 +22,7 @@ function ProductGallery(props) {
                                 </Link>
                                 <Card.Text>{element.price} $</Card.Text>
                             </Card.Body>
-                            <Button variant='dark' onClick={() => props.addToCart(element)}>Add to cart</Button>
+                            <Button variant='dark' onClick={() => props.addToCart(element)}>{t('add.to.cart')}</Button>
                         </Card>
                     </div>)}    
             </div>

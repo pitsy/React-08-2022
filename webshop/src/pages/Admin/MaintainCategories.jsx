@@ -29,7 +29,7 @@ function MaintainCategories() {
             method: 'PUT',
             body: JSON.stringify(categories),
         });
-        toast.success("Uus kategooria edukalt lisatud!")
+        toast.success("New category added!")
     }
 
     function findIfCategoryUnique() {
@@ -38,7 +38,7 @@ function MaintainCategories() {
         // -1 -> ei leitud
         if (index >= 0) {
             setUnique(false);
-            toast.error('Kategooria on juba olemas!');
+            toast.error('Category already exists!');
         } else {
             setUnique(true);
         }
@@ -51,20 +51,21 @@ function MaintainCategories() {
             method: 'PUT',
             body: JSON.stringify(categories),
         });
+        toast.success("Category deleted")
     }
 
     return ( 
         <div>
             <ToastContainer />
-            <p>Halda kategooriaid</p>
+            <p>Maintain categories</p>
             <div>
-                <label>Kategooria</label>
+                <label>Category </label>
                 <input onChange={findIfCategoryUnique} ref={categoryRef} type="text" />
-                <button disabled={isUnique === false} onClick={addNewCategory}>Lisa uus kategooria</button>
+                <button disabled={isUnique === false} onClick={addNewCategory}>Add new category</button>
                 <br />
                 {isLoading && <Spinner />}
                 <br />
-                <div>Kategooriad:</div>
+                <div>Categories:</div>
                 {categories.map((element, index) => 
                     <div key={element.name}>
                         {element.name} 

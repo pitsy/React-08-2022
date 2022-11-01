@@ -18,5 +18,21 @@
     "EMAIL_EXISTS": "Email already taken",
     "MISSING_PASSWORD": "Password missing",
     "INVALID_PASSWORD": "Invalid password",
-    "WEAK_PASSWORD : Password should be at least 6 characters": "Weak password : password should be at least 6 characters" 
+    "WEAK_PASSWORD : Password should be at least 6 characters": "Weak password : password should be at least 6 characters",
+    "add.to.cart": "Add to cart",
+    "products.length": "Products",
+    "navbar.login": "Log in",
+    "navbar.signin": "Sign in",
+    "cart.empty-message": "The cart is empty",
+    "cart.empty-button": "Empty cart",
+    "cart.items": "items",
+    "cart.parcel-machines": "Parcel machines",
+    "cart.selected-parcelm": "Selected parcel machine",
+    "cart.confirm": "Confirm order",
+    "cart.quantity": "Quantity",
+    "cart.price": "Price",
+    "cart.total-price": "Total price",
+    "about-us.title": "About us",
+    "shops.all-stores": "All stores",
+    "shops.all-tallinn-stores": "All stores in Tallinn"   
 }

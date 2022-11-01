@@ -33,7 +33,7 @@ function App() {
         <Route path={t('url.about')} element={ <AboutUs /> } />
         <Route path={t('url.shops')} element={ <Shops /> } />
         <Route path={t('url.cart')} element={ <Cart /> } />
-        <Route path='logi-sisse' element={ <Login /> } />
+        <Route path='login' element={ <Login /> } />
         <Route path='signup' element={ <Signup /> } />
         <Route path='testing' element={ <Testing />} />
         <Route path='product/:name' element={ <IndividualProduct />} />

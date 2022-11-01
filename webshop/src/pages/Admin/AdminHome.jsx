@@ -5,23 +5,26 @@ function AdminHome() {
     return ( 
         <div>
             <Link to='/admin/lisa-toode'>
-                <Button variant='dark'>Lisa uus toode</Button>
+                <Button className='admin-button' variant='outline-dark'>Add a new product</Button>
             </Link>
             {/* <Link to='/admin/muuda-toode'>
                 <Button variant='dark'>Muuda toodet</Button>
             </Link> */}
             <Link to='/admin/halda-tooteid'>
-                <Button variant='dark'>Halda tooteid</Button>
+                <Button className='admin-button' variant='outline-dark'>Maintain products</Button>
             </Link>
             <Link to='/admin/halda-poode'>
-                <Button variant='dark'>Halda poode</Button>
+                <Button className='admin-button' variant='outline-dark'>Maintain stores</Button>
             </Link>
             <Link to='/admin/halda-kategooriaid'>
-                <Button variant='dark'>Halda kategooriaid</Button>
+                <Button className='admin-button' variant='outline-dark'>Maintain categories</Button>
             </Link>
             <Link to='/admin/halda-pilte'>
-                <Button variant='dark'>Halda pilte</Button>
+                <Button className='admin-button' variant='outline-dark'>Maintain pictures</Button>
             </Link>
+            <br />
+            <br />
+            <p>This is a demo of the admin features so the database cannot be edited</p>
 
             {/* <Routes>
                 <Route path='admin/lisa-toode' element={ <AddProduct /> } />

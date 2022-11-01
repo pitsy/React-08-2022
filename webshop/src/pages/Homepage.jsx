@@ -102,7 +102,7 @@ function Homepage() {
                         cPage={changePage}
                         actPage={activePage}
                     />
-                    <div>Products: {filteredProducts.length}</div>
+                    <div>{t('products.length')}: {filteredProducts.length}</div>
                     <br />
 
                     <PageButtons 

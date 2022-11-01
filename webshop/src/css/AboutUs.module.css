@@ -1,0 +1,23 @@
+
+.title {
+    margin: 40px 10px 0 30px;
+}
+
+.text {
+    margin: 20px 20px 0 30px;
+    width: 80%;
+    max-width: 800px;
+}
+
+.display {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 5%;
+}
+
+.image {
+    margin: 60px 30px 0 60px;
+    height: 300px;
+    max-width: 500px;
+    width: 40%;
+}
