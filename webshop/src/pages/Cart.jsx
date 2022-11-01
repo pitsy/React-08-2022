@@ -89,10 +89,11 @@ function Cart() {
 
     return ( 
         <div>
-            { cart.length === 0 && <div className={styles.info}>Ostukorv on tuhi!</div> }
-            { cart.length > 0 && <div className={styles.info}>Ostukorvis on {totalQuantity()} eset</div>}
             <br />
-            <div className={styles.info}>{ cart.length > 0 && <Button variant='dark' onClick={emptyCart}>Tuhjenda ostukorv</Button>}</div>            <br /><br />
+            { cart.length === 0 && <div className={styles.info}>Ostukorv on tuhi!</div> }
+            { cart.length > 0 && <div className={styles.info}>{totalQuantity()} items</div>}
+            <br />
+            <div className={styles.info}>{ cart.length > 0 && <Button variant='dark' onClick={emptyCart}>Empty cart</Button>}</div>            <br /><br />
             {cart.map((element, index) => 
                 <div className={styles.product} key={element.product.id}>
                     <Link className={styles.link} to={'/product/' + element.name}>
@@ -101,25 +102,26 @@ function Cart() {
                     </Link>
                     <div className={styles.quanitityControls}>
                         <img className={styles.button} onClick={() => decreaseQuantity(index)} src={require('../images/minus.png')} alt='' />
-                        <span className={styles.quantity}> Kogus: {element.quantity} </span>
+                        <span className={styles.quantity}> Quantity: {element.quantity} </span>
                         <img className={styles.button} onClick={() => increaseQuantity(index)} src={require('../images/plus.png')} alt='' />
                     </div>
-                    <div className={styles.price}>Toote hind: {element.product.price} €</div>
-                    <div className={styles.total}>Hind kokku: {(element.product.price * element.quantity).toFixed(2)} €</div>
+                    <div className={styles.price}>Price: {element.product.price} €</div>
+                    <div className={styles.total}>Total price: {(element.product.price * element.quantity).toFixed(2)} €</div>
                     <img className={styles.button} onClick={() => removeProduct(index)} src={require('../images/remove.png')} alt='' />
                     <br /><br />
                 </div>
             )}
             { cart.length > 0 && <div className={styles.product}>
-                <div>Pakiautomaadid:</div>
+                <div>Parcel machines:</div>
                 <select onChange={pmSelected} ref={pmRef}>
                     { parcelMachines.map(element => <option>{element.NAME}</option> ) }
                 </select>
-                { selectedPM !== '' && <div>Valitud pakiautomaat: {selectedPM}</div>}
+                { selectedPM !== '' && <div>Chosen parcel machine: {selectedPM}</div>}
             </div>}
             { cart.length > 0 && <div className={styles.info}>{totalPrice()} €</div>}
             <br />
-            <div className={styles.info}><button onClick={sendEmail}>Kinnita tellimus</button></div>
+            <div className={styles.info}><Button variant='dark' onClick={sendEmail}>Confirm order</Button></div>
+            <br /><br />
         </div> );
 }
 

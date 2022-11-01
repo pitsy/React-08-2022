@@ -102,7 +102,7 @@ function Homepage() {
                         cPage={changePage}
                         actPage={activePage}
                     />
-                    <div>Tooteid: {filteredProducts.length} tk</div>
+                    <div>Products: {filteredProducts.length}</div>
                     <br />
 
                     <PageButtons 

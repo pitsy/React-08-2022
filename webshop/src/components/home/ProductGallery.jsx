@@ -18,7 +18,7 @@ function ProductGallery(props) {
                                 </Link>
                                 <Card.Text>{element.price} $</Card.Text>
                             </Card.Body>
-                            <Button variant='dark' onClick={() => props.addToCart(element)}>Lisa ostukorvi</Button>
+                            <Button variant='dark' onClick={() => props.addToCart(element)}>Add to cart</Button>
                         </Card>
                     </div>)}    
             </div>
