@@ -38,7 +38,6 @@ function Cart() {
         });
     };
 
-    // eemaldamine 
     function removeProduct(index) {
         cart.splice(index,1);
         setCart(cart.slice()); 
@@ -46,7 +45,6 @@ function Cart() {
         cartSumCtx.setCartSum(totalPrice());
     }
 
-    // kogusumma
     function totalPrice() {
         let total = 0;
         cart.forEach(element => total = total + element.product.price * element.quantity);
@@ -54,7 +52,6 @@ function Cart() {
         return total.toFixed(2);
     }
 
-    // tuhjendamine
     function emptyCart() {
         setCart([]);
         sessionStorage.setItem('cart', JSON.stringify([]));
