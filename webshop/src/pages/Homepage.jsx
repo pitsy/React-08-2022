@@ -34,7 +34,7 @@ function Homepage() {
                 setFilteredProducts(data || []);
                 setDbProducts(data || []);   
             });
-    }, []);
+    }, []); 
 
                         // {product} --> {product: {id: 11, name: 'hshsh}, quantity: 6}
     function addToCart(productClicked) {
