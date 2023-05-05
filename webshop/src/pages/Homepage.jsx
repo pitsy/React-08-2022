@@ -95,7 +95,6 @@ function Homepage() {
                 />
 
                 <Container>   
-
                     <SortButtons 
                         fProducts={filteredProducts}
                         setFProducts={setFilteredProducts}
